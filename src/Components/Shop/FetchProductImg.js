@@ -3,7 +3,7 @@ import Aux from 'react-aux';
 
 const fetchProductImg = (props) => {
 
-const imgLink = process.env.PUBLIC_URL + "Graphics/" + props.link + ".jpg"
+const imgLink = "/Graphics/" + props.link + ".jpg"
 
   return (
       <Aux>

@@ -247,7 +247,7 @@ div.Casablanca {
 
   &__list li {
     text-align: left;
-    line-height: 200%;
+    line-height: 400%;
   }
 
   &__icon {
@@ -266,6 +266,7 @@ div.Casablanca {
     background: $color-secondary-black;
     z-index: 2;
     cursor: pointer;
+    transition: .2s;
   }
 }
 
@@ -301,7 +302,7 @@ color: $color-primary-grey;
   grid-area: 1 / 1 / span 1 / span 1;
   align-self: center;
   margin: auto;
-  transition: .2s;
+
   }
 
   div.active .top-menu__icon-2 {
@@ -331,19 +332,29 @@ color: $color-primary-grey;
   display: grid;
   height: auto;
   width: 100vw;
-  grid-template: 4vh repeat(3, auto) 7vh/ 5vw 1fr 5vw;
+  grid-template: 4vh repeat(4, auto) 7vh/ 5vw 1fr 5vw;
   overflow-y: hidden;
   top: 0;
   position: absolute;
-  row-gap: 30px;
+  row-gap: 50px;
+
+
+  &__top-tooltip {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-area: 2 / 2 / span 1 / span 1;
+    grid-template-columns: repeat(5,auto);
+    width: 50%;
+}
+
+
+  
 
 
   &__topImg {
-  grid-area: 2 / 2 / span 1 / span 1;
+  grid-area: 3 / 2 / span 1 / span 1;
   width: 100%;
   }
-
-
 
 
   .top-menu {
@@ -353,15 +364,30 @@ color: $color-primary-grey;
 
 .products-container {
   display: grid;
-  place-items: center;
-  grid-template-columns: repeat(5,1fr);
-  grid-area: 3 / 2 / span 1 / span 1;
-  column-gap: 20px;
+  grid-template: auto auto / 1fr;
+  grid-area: 4 / 2 / span 1 / span 1;
   height: fit-content;
-  row-gap: 20px;
+  align-items: center;
 
+  &__tooltip {
+  height: 5vh;  
+  }
 
+  h4 {
+    grid-area: 1 / 1 / span 1 / span 1;
+    justify-self: left;
+  }
 
+  &__list {
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(5,1fr);
+    column-gap: 20px;
+    height: fit-content;
+    row-gap: 20px;
+    grid-area: 2 / 1 / span 1 / span 1;
+
+  
   &__product {
 
     display: grid;
@@ -411,6 +437,7 @@ color: $color-primary-grey;
     }
 
   }
+}
 }
 
 /* 3. Mobile */
