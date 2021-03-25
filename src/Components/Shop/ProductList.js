@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import FetchProductImg from './FetchProductImg'
 
 
 class ProductList extends Component {
@@ -16,6 +17,9 @@ class ProductList extends Component {
 		  
 	  }
 
+
+
+
 	  fetchData = () => {
 	  axios.get('/api/products').then((response) => {
 		  console.log(response.data)
@@ -23,20 +27,41 @@ class ProductList extends Component {
 	  }).catch((error) => {console.log(error)})
 
 	}
+
 	
 render() {
 
-	const products = this.state.products.map(product => (
-		<div key={product._id}>
-	   <h1>{product.product_name}</h1>
-		<p>{product.price}</p>
-		  <h1>Products</h1>
+
+	var filteredProducts =  this.state.products.filter(function(filteredProduct) {
+
+
+		function categoryFilterHelper() {
+
+			if (window.location.pathname.split("/").pop() !== "all") {
+				return window.location.pathname.split("/").pop()
+			} else {return filteredProduct.category}
+		}
+
+		console.log(categoryFilterHelper());
+
+		return filteredProduct.category == categoryFilterHelper();
+	});
+
+	const products = filteredProducts.map(product => (
+	
+		
+		<div className="products-container__product" key={product._id}>
+		<FetchProductImg className={product.product_id} link={product.product_id}/>
+		<div className="products-container__product__label">
+	   <h2>{product.product_name}</h2>
+		<h3>{product.price} PLN</h3>
+		</div>
 		</div>
 
 	));
 
 	  return (
-		<div>
+		<div className="products-container">
 		  {products}
 		</div>
 

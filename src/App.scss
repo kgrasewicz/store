@@ -1,145 +1,37 @@
-body {
-  --maincolor: #ebe9e7;
-  --secondcolor: #090909;
-  --thirdcolor: #dc2121;
-  background: var(--maincolor);
-}
+@import './base';
 
-.App {
-  text-align: center;
-}
-
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  vertical-align: baseline;
-}
-
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
-}
+$color-primary-grey: #ebe9e7;
+$color-secondary-black: #090909;
+$color-tertiary-red: #dc2121;
+$color-text-white: #ffffff;
 
 body {
-  line-height: 1;
+  background: $color-primary-grey;
 }
 
-ol,
-ul {
-  list-style: none;
-}
-
-blockquote,
-q {
-  quotes: none;
-}
-
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: "";
-  content: none;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
+html {
+  font-size: 6px;
 }
 
 a {
   text-decoration: none;
-  color: var(--secondcolor);
+  color: $color-secondary-black;
+}
+
+h1 {
+  font-size: calc(3.3rem + 0.5vw);
+}
+
+h2 {
+  font-size: calc(1.3rem + 0.5vw);
+}
+
+h3 {
+  font-size: calc(1rem + 0.5vw);
+}
+
+h4 {
+  font-size: calc(1.6rem + 0.5vw);
 }
 
 /* 1. General */
@@ -149,8 +41,7 @@ a {
 }
 
 .home,
-.about,
-.shop {
+.about {
   display: grid;
   height: 100vh;
   width: 100vw;
@@ -166,18 +57,20 @@ a {
 }
 
 .newsletter-info {
-  background: var(--maincolor);
+  background: $color-primary-grey;
   height: 4vh;
   width: 100vw;
   grid-area: 1 / 1 / span 12 / span 12;
   display: grid;
   place-items: center;
-  border-bottom: 1px solid var(--secondcolor);
+  border-bottom: 1px solid $color-secondary-black;
   z-index: 1;
+  position: fixed;
+  top: 0;
 
   &__carousel {
     
-    color: var(--secondcolor);
+    color: $color-secondary-black;
   
 
   &__link {
@@ -188,7 +81,7 @@ a {
   }
 
   &__link:hover {
-    color: var(--thirdcolor);
+    color: $color-tertiary-red;
   }
 
   }
@@ -197,7 +90,7 @@ a {
 
 
 .info-font {
-  font-size: calc(6px + 0.5vw);
+  font-size: calc(1rem + 0.5vw);
   font-weight: 400;
 }
 
@@ -228,28 +121,31 @@ a {
   grid-area: 6 / 2 / span 3 / span 4;
   width: fit-content;
   align-items: center;
+
+  li {
+    height: calc(6.6rem + 0.5vw);
+    cursor: pointer;
+  }
+  
 }
 
-.main-menu li {
-  height: calc(40px + 0.5vw);
-  cursor: pointer;
-}
-
-.menu-font:hover {
-  color: var(--thirdcolor);
-}
 
 .menu-font {
-  font-size: calc(10px + 0.5vw);
+  font-size: calc(1.6rem + 0.5vw);
   font-weight: 600;
+
+  &:hover {
+    color: $color-tertiary-red;
+  }
 }
 
 .bottom-info {
   width: 90vw;
-  grid-area: 22 / 1 / span 3 / span 13;
+position: fixed;
+bottom: 0;
   height: 7vh;
-  border-top: 1px solid var(--secondcolor);
-  background: var(--maincolor);
+  border-top: 1px solid $color-secondary-black;
+  background: $color-primary-grey;
   z-index: 1;
   align-self: end;
   display: grid;
@@ -272,19 +168,16 @@ a {
 }
 
 
-
-
-
 .link {
   cursor: pointer;
-  border-color: var(--secondcolor);
+  border-color: $color-secondary-black;
   border-bottom-width: 1px;
   border-style: solid;
 }
 
 .link:hover {
-  color: var(--thirdcolor);
-  border-color: var(--thirdcolor);
+  color: $color-tertiary-red;
+  border-color: $color-tertiary-red;
 }
 
 h2.Casablanca {
@@ -294,7 +187,7 @@ h2.Casablanca {
 
 h2 {
   text-align: left;
-  font-size: calc(8px + 0.5vw);
+  font-size: calc(1.3rem + 0.5vw);
   line-height: normal;
   font-weight: 400;
 }
@@ -302,23 +195,20 @@ h2 {
 a.Casablanca {
   grid-area: 18 / 6 / span 1 / span 2;
   font-weight: 600;
-  font-size: calc(12px + 0.5vw);
+  font-size: calc(2rem + 0.5vw);
   align-self: end;
-  border-bottom: 2px solid var(--secondcolor);
+  border-bottom: 2px solid $color-secondary-black;
   line-height: normal;
   text-align: left;
 }
 
 div.Casablanca {
   grid-area: 11 / 5 / span 2 / span 3;
-  height: calc(20px + 0.5vw);
-  border-bottom: 2px solid var(--secondcolor);
+  height: calc(3.3rem + 0.5vw);
+  border-bottom: 2px solid $color-secondary-black;
 }
 
-h1 {
-  font-size: calc(20px + 0.5vw);
-  text-align: left;
-}
+
 
 .about-desc {
   display: grid;
@@ -334,16 +224,16 @@ h1 {
   display: grid;
   row-gap: 10px;
   animation: slideshow 60s linear infinite;
+
+  img {
+    width: 100%;
+  }
 }
 
 @keyframes slideshow {
   100% {
     transform: translate3d(0, -85.81428571%, 0);
   }
-}
-
-.about__carousel img {
-  width: 100%;
 }
 
 .top-menu {
@@ -354,41 +244,50 @@ h1 {
   right: 1vw;
   z-index: 5;
   padding: 0px 10px 10px 10px;
+
+  &__list li {
+    text-align: left;
+    line-height: 200%;
+  }
+
+  &__icon {
+    display: grid;
+    grid-template: 1fr 1fr / 1fr;
+    place-items: center;
+    width: 20px;
+    padding: 8px 0;
+    justify-self: end;
+    cursor: pointer;
+  }
+
+  &__icon-1, &__icon-2 {
+    width: 20px;
+    height: 2px;
+    background: $color-secondary-black;
+    z-index: 2;
+    cursor: pointer;
+  }
 }
 
 .active.top-menu {
-  background: var(--secondcolor);
-}
+  background: $color-secondary-black;
 
-.top-menu__list li {
-  text-align: left;
-  line-height: 200%;
+  &__list {
+    display: grid;
+  }
 }
 
 .active .top-menu__list li .menu-font {
-color: var(--maincolor);
+color: $color-primary-grey;
 }
 
 .active .top-menu__list li .menu-font:hover {
-  color: var(--thirdcolor);
+  color: $color-tertiary-red;
   }
 
-.active .top-menu__list {
-  display: grid;
-}
 
 .inactive .top-menu__list {
   display: none;
-}
-
-.top-menu__icon {
-  display: grid;
-  grid-template: 1fr 1fr / 1fr;
-  place-items: center;
-  width: 20px;
-  padding: 8px 0;
-  justify-self: end;
-  cursor: pointer;
 }
 
 .active .top-menu__icon {
@@ -396,7 +295,7 @@ color: var(--maincolor);
 }
 
 .active .top-menu__icon-1,  .active .top-menu__icon-2 {
-  background: var(--maincolor);
+  background: $color-primary-grey;
   transform: rotate(45deg);
   transform-origin: center;
   grid-area: 1 / 1 / span 1 / span 1;
@@ -410,29 +309,108 @@ color: var(--maincolor);
   }
   
 
-.top-menu__icon-1,
-.top-menu__icon-2 {
-  width: 20px;
-  height: 2px;
-  background: var(--secondcolor);
-  z-index: 2;
-  cursor: pointer;
-}
-
-.is-active::after {
-  width: 5px;
-  height: 5px;
-  background: var(--maincolor);
-  content: '';
-  position: absolute;
-  top: 50%;
-  right: -15px;
-  z-index: 1000000;
-  border-radius: 50%;
-}
-
 .is-active {
   position: relative;
+
+  &::after {
+    width: 5px;
+    height: 5px;
+    background: $color-primary-grey;
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -15px;
+    z-index: 1000000;
+    border-radius: 50%;
+  }
+}
+
+
+.shop {
+  overflow-y: auto;
+  display: grid;
+  height: auto;
+  width: 100vw;
+  grid-template: 4vh repeat(3, auto) 7vh/ 5vw 1fr 5vw;
+  overflow-y: hidden;
+  top: 0;
+  position: absolute;
+  row-gap: 30px;
+
+
+  &__topImg {
+  grid-area: 2 / 2 / span 1 / span 1;
+  width: 100%;
+  }
+
+
+
+
+  .top-menu {
+    position: fixed;
+  }
+}
+
+.products-container {
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(5,1fr);
+  grid-area: 3 / 2 / span 1 / span 1;
+  column-gap: 20px;
+  height: fit-content;
+  row-gap: 20px;
+
+
+
+  &__product {
+
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+
+    &:hover {
+      background: $color-secondary-black;
+
+      img {
+        opacity: .4;
+      }
+
+      h3, h2  {
+        color: $color-text-white;
+        z-index: 1;
+        visibility: visible;
+        text-align: center;
+      }
+    }
+    
+
+    img {
+      width: 100%;
+      grid-area: 1 / 1 / span 1 / span 1;
+    }
+
+    &__label {
+      grid-area: 1 / 1 / span 1 / span 1;
+      visibility: hidden;
+      display: grid;
+      grid-template: repeat(2, 1fr) / 1fr;
+      justify-items: center;
+      height: 100%;
+      row-gap: 5px;
+      padding: 0 5px;
+
+      h2 {
+        align-self: end;
+        line-height: normal;
+      }
+
+      h3 {
+        align-self: start;
+        font-weight: 300;
+      }
+    }
+
+  }
 }
 
 /* 3. Mobile */

@@ -4,12 +4,14 @@ import BottomInfo from "../../Components/BottomInfo/BottomInfo";
 import { BrowserRouter } from "react-router-dom";
 import TopMenu from "../../Components/TopMenu/TopMenu";
 import ProductList from "../../Components/Shop/ProductList";
+import TopImg from "../../Components/Shop/topImg.png";
 
 class Shop extends Component {
   render() {
     return (
       <BrowserRouter>
         <div className="shop">
+          <img className="shop__topImg" src={TopImg} alt="graphics"/>
           <NewsletterInfo />
           <BottomInfo />
           <TopMenu />
