@@ -1,49 +1,55 @@
 import React, { Component } from "react";
 import axios from "axios";
 import FetchProductImg from "./FetchProductImg";
+import { BrowserRouter, withRouter} from "react-router-dom";
+import { useLocation, Switch } from 'react-router-dom'; 
+import Aux from "react-aux";
+import TopTooltip from "./TopTooltip";
 
 class ProductList extends Component {
-  constructor(state) {
-    super(state);
+
+  constructor(props) {
+
+    super(props)
     this.state = {
       products: [],
+      filteredProducts: []
     };
+
+    this.props = props;
+
+    
+  
   }
 
   componentDidMount = () => {
+    
     this.fetchData();
+ 
+    
   };
+ 
 
   fetchData = () => {
+
     axios
-      .get("/api/products")
+      .get("/api/products", )
       .then((response) => {
         console.log(response.data);
-        this.setState({ products: response.data });
+        this.setState({ products: response.data.filter( (filteredProduct)  => { return filteredProduct.category === ((this.props.match.params.category) === "all" ? filteredProduct.category : this.props.match.params.category) }) });
+
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
+  
+  
+
   render() {
-    var filteredProducts = this.state.products.filter(function (
-      filteredProduct
-    ) {
-      function categoryFilterHelper() {
-        if (window.location.pathname.split("/").pop() !== "all") {
-          return window.location.pathname.split("/").pop();
-        } else {
-          return filteredProduct.category;
-        }
-      }
 
-      console.log(categoryFilterHelper());
-
-      return filteredProduct.category == categoryFilterHelper();
-    });
-
-    const products = filteredProducts.map((product) => (
+    const products = this.state.products.map((product) => (
       <div className="products-container__list__product" key={product._id}>
         <FetchProductImg
           className={product.product_id}
@@ -56,15 +62,21 @@ class ProductList extends Component {
       </div>
     ));
 
+    
+
     return (
+       <Aux>
+      <TopTooltip />
+
       <div className="products-container">
         <div className="products-container__tooltip">
           <h4>collection</h4>
         </div>
         <div className="products-container__list">{products}</div>
       </div>
+      </Aux>
     );
   }
 }
 
-export default ProductList;
+export default withRouter(ProductList);

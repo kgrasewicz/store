@@ -336,7 +336,7 @@ color: $color-primary-grey;
   overflow-y: hidden;
   top: 0;
   position: absolute;
-  row-gap: 50px;
+  row-gap: 20px;
 
 
   &__top-tooltip {
@@ -368,6 +368,7 @@ color: $color-primary-grey;
   grid-area: 4 / 2 / span 1 / span 1;
   height: fit-content;
   align-items: center;
+  padding-top: 50px;
 
   &__tooltip {
   height: 5vh;  
