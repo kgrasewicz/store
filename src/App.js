@@ -5,10 +5,12 @@ import Home from './Containers/Home/Home';
 import About from './Containers/About/About';
 import Shop from './Containers/Shop/Shop';
 import { Route} from 'react-router-dom';
+import ProductList from './Components/Shop/ProductList';
 
 
 
 class App extends Component {
+
 
 
   render() {
@@ -20,7 +22,7 @@ class App extends Component {
       <Route path="/" exact component={Home} />
       <Route path="/about" component={About} />
 
-      <Route path="/shop" render={props => <Shop {...props}/>}/>
+      <Route path="/shop/:category" render={ (props) => <Shop><ProductList {...props}/></Shop>}/>
       </Switch>
       </BrowserRouter>
     </div>

@@ -17,7 +17,7 @@ const topMenu = () => {
           <div className="top-menu__icon-2"></div>
       </div>
       <ul className="top-menu__list">
-      <li><NavLink exact={true} to="/" activeClassName='is-active'  className="menu-font">home</NavLink></li>
+      <li><NavLink exact to="/" activeClassName='is-active'  className="menu-font">home</NavLink></li>
       <li><NavLink to="/shop" activeClassName='is-active' className="menu-font">shop</NavLink></li>
       <li><NavLink to="/about"activeClassName='is-active' className="menu-font">about us</NavLink></li>
       <li><NavLink to="/terms" activeClassName='is-active' className="menu-font">terms & shipment</NavLink></li>
