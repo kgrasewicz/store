@@ -12,7 +12,7 @@ const productSchema = mongoose.Schema({
         type: Number,
     },
     stock: {
-        type: Number,
+        type: Array,
     },
     category: {
         type: String
@@ -30,8 +30,11 @@ const productSchema = mongoose.Schema({
         type: String,
     },
     tags: {
-        type: Object,
+        type: Array,
     },
+    specs: {
+        type: String
+    }
 }, {
     timestamps: true
 })

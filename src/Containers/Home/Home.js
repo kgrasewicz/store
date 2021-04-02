@@ -4,7 +4,7 @@ import Menu from "../../Components/Menu/Menu";
 import Logo from "../../Components/Logo/Logo";
 import NewsletterInfo from "../../Components/NewsletterInfo/Newsletter_Info";
 import BottomInfo from "../../Components/BottomInfo/BottomInfo";
-import { BrowserRouter } from "react-router-dom";
+
 
 
 class Home extends Component {

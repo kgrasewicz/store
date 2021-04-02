@@ -1,50 +1,42 @@
-import React, {Component} from 'react';
-import NewsletterInfo from "../../Components/NewsletterInfo/Newsletter_Info";
+import React, { Component } from "react";
 import BottomInfo from "../../Components/BottomInfo/BottomInfo";
-import TopMenu from "../../Components/TopMenu/TopMenu";
-import TopImg from "../../Components/Shop/topImg.png";
 import TopTooltip from "../../Components/Shop/TopTooltip";
-
+import { Switch, Route } from "react-router-dom";
+import ProductList from "../../Components/Shop/ProductList";
+import ProductItem from "../../Components/Shop/ProductItem";
 
 class Shop extends Component {
-
   constructor(props) {
-
-    super(props)
+    super(props);
 
     this.props = props;
 
     this.state = {
       id: null,
-    }
-  
-
-  
+    };
   }
 
   render() {
-
-    
     return (
+      <div className="shop">
+        <TopTooltip />
 
-      
-
-        <div className="shop">
-
-
-          <TopTooltip/>;
-
-          
-          <img className="shop__topImg" src={TopImg} alt="graphics"/>
-          <NewsletterInfo />
-          <BottomInfo />
-          <TopMenu />
-
-          {this.props.children}
-
-        </div>
+        <BottomInfo />
 
 
+        {this.props.children}
+
+        <Switch>
+          <Route
+            path="/shop/:category/:id"
+            render={(props) => <ProductItem {...props} />}
+          />
+          <Route
+            path="/shop/:category"
+            render={(props) => <ProductList {...props} />}
+          />
+        </Switch>
+      </div>
     );
   }
 }
