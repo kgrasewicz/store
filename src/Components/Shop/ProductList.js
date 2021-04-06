@@ -19,7 +19,8 @@ class ProductList extends Component {
       currentProducts: [],
       currentPage: null,
       totalPages: null,
-      productList: []
+      productList: [],
+      category: ""
       
     };
 
@@ -28,18 +29,23 @@ class ProductList extends Component {
 
   componentDidMount = () => {
     this._isMounted = true;
-    const category = this.props.match.params.category;
-    this.fetchData(category);
-
-    
+    this.fetchData(this.props.match.params.category);
 
   };
 
   componentDidUpdate = (prevProps, prevState) => {
-    if (this._isMounted) {
-      this.fetchData(this.props.match.params.category);
+    
+
+
+
+      if (prevProps.match.params.category !== this.props.match.params.category) {
+
+        this._isMounted = true;
+        this.fetchData(this.props.match.params.category);
+        
+
     }
-    this._isMounted = false;
+
   };
 
 
@@ -62,9 +68,8 @@ class ProductList extends Component {
     
     );
 
-
     
-    console.log(this.state)
+
   };
 
   SortPickerHandler = () => {
@@ -114,6 +119,9 @@ class ProductList extends Component {
 
 
   onPageChanged = data => {
+
+
+
     const { allProducts } = this.state;
     const { currentPage, totalPages, pageLimit } = data;
     const offset = (currentPage - 1) * pageLimit;
@@ -121,7 +129,7 @@ class ProductList extends Component {
 
     this.setState({ currentPage, currentProducts, totalPages });
 
-
+    this._isMounted = false;
   }
 
 
@@ -130,12 +138,12 @@ class ProductList extends Component {
   render() {
 
 
-    const { allProducts, currentProducts, currentPage, totalPages } = this.state;
+    const { allProducts, currentProducts, currentPage} = this.state;
     const totalProducts = allProducts.length;
    
     localStorage.setItem("currentPage", JSON.stringify(currentPage));
 
-    console.log(localStorage);
+
 
     if (totalProducts=== 0) return null;
 
