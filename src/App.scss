@@ -1,9 +1,9 @@
 @import "./base";
 
-$color-primary-grey: #ebe9e7;
+$color-primary-grey: #ffffff;
 $color-secondary-black: #090909;
 $color-tertiary-red: #dc2121;
-$color-hover-grey: #bfbfbf;
+$color-hover-grey: #e4e4e4;
 $color-text-white: #ffffff;
 $color-text-grey: #626262;
 
@@ -460,10 +460,16 @@ div.active .top-menu__icon-2 {
 
     svg {
       height: 40%;
-      transform: rotate(180deg);
+
 
       path {
         fill: $color-text-white;
+        display: none;
+
+
+        &.active {
+          display: block;
+        }
       }
     }
     
@@ -492,6 +498,8 @@ svg {
   height: 100%;
   width: 100%;
 }
+
+
 
 .products-container {
   display: grid;
@@ -679,6 +687,180 @@ svg {
   }
 }
 
+
+.cart-container {
+
+  display: grid;
+  grid-area: 2 / 2 / span 1 / span 1;
+  height: auto;
+  grid-template: auto auto / 1fr;
+  row-gap: 50px;
+
+
+  &__tooltip {
+    display: grid;
+    grid-template: 1fr / 1fr calc(24rem + .5vw);
+    align-items: center;
+
+
+    &__icons {
+      grid-area: 1 / 2 / span 1 / span 1;
+      grid-auto-flow: column;
+      display: grid;
+      column-gap: calc(1rem + .5vw);
+
+      li {
+
+      border-radius: 50%;
+      height: calc(6rem + .5vw);
+      width: calc(6rem + .5vw);
+      background: $color-hover-grey;
+      display: grid;
+      place-items: center;
+
+      &.active {
+        background: $color-secondary-black;
+
+        svg path {
+          fill: $color-text-white;
+        }
+      }
+
+      .cart__icon {
+        height: 50%;
+        width: auto;
+        
+        
+      }
+
+    }
+    }
+
+    
+  }
+
+  &__table {
+
+    display: grid;
+    grid-template: calc(5rem + .5vw) auto auto calc(10rem + .5vw) / 1fr 3fr 1fr 1fr;
+    row-gap: 20px;
+
+    &__legend {
+    grid-area: 1 / 1 / span 1 / span 4;
+    display: grid;
+    grid-template: 1fr / 1fr 3fr 1fr 1fr;
+    border-bottom: 1px solid $color-hover-grey;
+
+    &__item {
+      grid-area: 1 / 2 / span 1 / span 1;
+    }
+
+    &__quantity {
+      grid-area: 1 / 3 / span 1 / span 1;
+    }
+
+    &__subtotal {
+      grid-area: 1 / 4 / span 1 / span 1;
+    }
+
+    }
+
+
+    &__products {
+      display: grid;
+      grid-auto-flow: row;
+      height: auto;
+      grid-area: 2 / 1 / span 1 / span 4;
+      
+  
+      &__item {
+        height: calc(20rem + .5vw);
+        display: grid;
+        grid-template: 1fr/1fr 3fr 1fr 1fr;
+        align-items: center;
+        
+  
+        a {
+          display: grid;
+          height: 100%;
+          grid-auto-flow: column;
+          grid-template: 1fr/1fr 3fr;
+          align-items: center;
+          grid-area: 1/ 1 / span 1 / span 2;
+  
+        img {
+          height: calc(16rem + .5vw)
+        }
+        
+        }
+
+        .cart__qty {
+          grid-area: 1 / 3 / span 1/ span 1;
+        }
+
+        .cart__total {
+          grid-area: 1 / 4 / span 1/ span 1;
+        }
+
+        .cart__exit {
+          grid-area: 1 / 4 / span 1/ span 1;
+          padding: 10px;
+          justify-self: end;
+          align-self: start;
+          background: $color-primary-grey;
+          
+          
+
+          h2 {
+            transform: scale(1.3)
+          }
+        }
+
+        &__line {
+          height: 1px;
+          background: $color-hover-grey;
+          grid-area: 1/2/span 1/span 3;
+          align-self: end;
+          
+        }
+      }
+  
+    }
+
+    &__total {
+      grid-area: 3 / 2 / span 1 / span 3;
+      display: grid;
+      height: calc(8rem + .5vw);
+      align-items: center;
+    }
+
+    &__buttons {
+      grid-area: 4 / 2 / span 1 / span 3;
+      display: grid;
+      grid-template: 1fr / 1fr 1fr;
+      height: calc(6rem + 0.5vw);
+      column-gap: 10px;
+
+      &__continue-shopping {
+        background: $color-primary-grey;
+      }
+
+      &__checkout {
+        background: $color-secondary-black;
+        color: $color-text-white;
+      }
+      
+
+      button {
+        cursor: pointer;
+        border: 1px solid $color-secondary-black;
+      }
+      
+    }
+  }
+
+ 
+}
 
 .pagination {
 grid-area: 4 / 2 / span 1 / span 1;

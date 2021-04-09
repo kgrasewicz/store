@@ -1,7 +1,7 @@
 import { json } from 'express'
 import mongoose from 'mongoose'
 
-const productSchema = mongoose.Schema({
+const productSchema = new mongoose.Schema({
     product_id: {
         type: String,
     },
@@ -37,7 +37,7 @@ const productSchema = mongoose.Schema({
     }
 }, {
     timestamps: true
-})
+}, { collection : 'products' })
 
 const Product = mongoose.model('Product', productSchema)
 

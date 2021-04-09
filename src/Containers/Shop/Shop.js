@@ -4,6 +4,7 @@ import TopTooltip from "../../Components/Shop/TopTooltip";
 import { Switch, Route } from "react-router-dom";
 import ProductList from "../../Components/Shop/ProductList";
 import ProductItem from "../../Components/Shop/ProductItem";
+import Cart from "./Cart"
 
 class Shop extends Component {
   constructor(props) {
@@ -27,6 +28,10 @@ class Shop extends Component {
         {this.props.children}
 
         <Switch>
+          <Route
+          path="/shop/cart"
+          render={(props) => <Cart {...props} />}
+          />
           <Route
             path="/shop/:category/:id"
             render={(props) => <ProductItem {...props} />}
