@@ -15,7 +15,6 @@ const aboutImgCarousel = () => {
         <img src={About4} alt=""></img>
         <img src={About5} alt=""></img>
         <img src={About6} alt=""></img>
-        <img src={About1} alt=""></img>
     </div>
   );
 };

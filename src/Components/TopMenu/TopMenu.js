@@ -21,7 +21,7 @@ const topMenu = () => {
 
     <div className="top-menu inactive">
       <div className="top-menu__icon" onClick={switchMenuHandler}>
-          <div className="top-menu__icon-1"></div>
+      <div className="top-menu__icon-1"></div>
           <div className="top-menu__icon-2"></div>
       </div>
       <ul className="top-menu__list">

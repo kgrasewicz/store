@@ -7,6 +7,10 @@ let imgClass= { Casablanca: "imgCasablanca", Marocco: "Marocco" };
 let name= { Casablanca: "Casablanca", Marocco: "Marocco" };
 
 const collectionRender = (props) => {
+
+
+
+
   return (
     <Aux>
     <LoadImage className={imgClass[props.collectionName].concat("-1")} link={name[props.collectionName].concat("-1")} alt="graphics"/>

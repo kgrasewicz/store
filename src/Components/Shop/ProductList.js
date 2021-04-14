@@ -6,7 +6,7 @@ import { NavLink, withRouter } from "react-router-dom";
 import TopImg from "./topImg.png";
 import _ from "lodash";
 import $ from "jquery";
-import Pagination from "../../Paginate.js"
+import Pagination from "../../Paginate.js";
 
 class ProductList extends Component {
   _isMounted = false;
@@ -20,8 +20,7 @@ class ProductList extends Component {
       currentPage: null,
       totalPages: null,
       productList: [],
-      category: ""
-      
+      category: "",
     };
 
     this.props = props;
@@ -30,46 +29,43 @@ class ProductList extends Component {
   componentDidMount = () => {
     this._isMounted = true;
     this.fetchData(this.props.match.params.category);
-
+    this.fetchCartData();
   };
 
   componentDidUpdate = (prevProps, prevState) => {
-    
-
-
-
-      if (prevProps.match.params.category !== this.props.match.params.category) {
-
-        this._isMounted = true;
-        this.fetchData(this.props.match.params.category);
-        
-
+    if (prevProps.match.params.category !== this.props.match.params.category) {
+      this._isMounted = true;
+      this.fetchData(this.props.match.params.category);
     }
-
   };
 
-
-    componentWillUnmount() {
+  componentWillUnmount() {
     this._isMounted = false;
   }
 
   sortArray = (method, order) => {
-    
-    this.setState({
-      productList: _.orderBy(this.state.products, [method], [order]),
-    }, () => {
-      this.setState({ allProducts: this.state.productList }, () => {
-        this.setState({currentPage: JSON.parse(window.localStorage.getItem('currentPage'))})
-        const offset = (this.state.currentPage - 1) * 12;
-        this.setState({currentProducts: this.state.allProducts.slice(offset, offset + 12)})
-      })
-      
-    }
-    
+    this.setState(
+      {
+        productList: _.orderBy(this.state.products, [method], [order]),
+      },
+      () => {
+        this.setState({ allProducts: this.state.productList }, () => {
+          this.setState({
+            currentPage: JSON.parse(window.localStorage.getItem("currentPage")),
+          });
+          const offset = (this.state.currentPage - 1) * 12;
+          this.setState({
+            currentProducts: this.state.allProducts.slice(offset, offset + 12),
+          });
+          console.log("why");
+          axios.get("/api/cart").then((response) => {
+            $(".items-counter h5").text(response.data.itemsTotal);
+
+            console.log(response);
+          });
+        });
+      }
     );
-
-    
-
   };
 
   SortPickerHandler = () => {
@@ -94,22 +90,21 @@ class ProductList extends Component {
               );
             }),
           });
+          console.log("why");
 
           this.sortArray("product_name", "asc");
-          
-          
 
           this.setState({ allProducts: this.state.productList });
 
           const { currentPage, totalPages, pageLimit } = this.state.data;
-      
+
           const offset = (currentPage - 1) * pageLimit;
-          const currentProducts = this.state.allProducts.slice(offset, offset + pageLimit);
-      
+          const currentProducts = this.state.allProducts.slice(
+            offset,
+            offset + pageLimit
+          );
+
           this.setState({ currentPage, currentProducts, totalPages });
-
-
-          
         }
       })
       .catch((error) => {
@@ -117,11 +112,22 @@ class ProductList extends Component {
       });
   };
 
+  fetchCartData = () => {
+    if (this._isMounted) {
+      axios
+        .get("/api/cart")
+        .then((response) => {
+          $(".items-counter").text(response.data.itemsTotal);
 
-  onPageChanged = data => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
 
-
-
+  onPageChanged = (data) => {
     const { allProducts } = this.state;
     const { currentPage, totalPages, pageLimit } = data;
     const offset = (currentPage - 1) * pageLimit;
@@ -130,22 +136,15 @@ class ProductList extends Component {
     this.setState({ currentPage, currentProducts, totalPages });
 
     this._isMounted = false;
-  }
-
-
-
+  };
 
   render() {
-
-
-    const { allProducts, currentProducts, currentPage} = this.state;
+    const { allProducts, currentProducts, currentPage } = this.state;
     const totalProducts = allProducts.length;
-   
+
     localStorage.setItem("currentPage", JSON.stringify(currentPage));
 
-
-
-    if (totalProducts=== 0) return null;
+    if (totalProducts === 0) return null;
 
     const products = currentProducts.map((product) => (
       <NavLink
@@ -162,9 +161,6 @@ class ProductList extends Component {
           className={product.product_id}
           link={product.product_id}
         />
-        <div className={"products-container__list__product__sizes"}>
-          <h2>Unavailable</h2>
-        </div>
         <div className="products-container__list__product__label">
           <h2>{product.product_name}</h2>
           <h3>{product.price} PLN</h3>
@@ -175,12 +171,20 @@ class ProductList extends Component {
     return (
       <Aux>
         <img className="shop__topImg" src={TopImg} alt="graphics" />
-        <Pagination totalRecords={totalProducts} pageLimit={12}  pageNeighbours={1} onPageChanged={this.onPageChanged} />
+        <Pagination
+          totalRecords={totalProducts}
+          pageLimit={12}
+          pageNeighbours={1}
+          onPageChanged={this.onPageChanged}
+        />
         <div className="products-container">
           <div className="products-container__tooltip">
             <h4>collection</h4>
             <div className="products-container__tooltip__sort-container">
-              <div onClick={this.SortPickerHandler} className="products-container__tooltip__sort-container__top">
+              <div
+                onClick={this.SortPickerHandler}
+                className="products-container__tooltip__sort-container__top"
+              >
                 <h2 className="products-container__tooltip__sort-container__top__title">
                   Sort by:
                 </h2>
@@ -191,16 +195,27 @@ class ProductList extends Component {
               </div>
 
               <ul className="products-container__tooltip__sort-container__list">
-                <li onClick={() => this.sortArray("product_name", "asc")}>
+                <li
+                  onClick={() => {
+                    this.sortArray("product_name", "asc")
+                    this.SortPickerHandler()
+                  }}
+                >
                   <h2>product name ascending</h2>
                 </li>
-                <li onClick={() => this.sortArray("product_name", "desc")}>
+                <li onClick={() => {this.sortArray("product_name", "desc")
+                this.SortPickerHandler()
+                }}>
                   <h2>product name descending</h2>
                 </li>
-                <li onClick={() => this.sortArray("price", "asc")}>
+                <li onClick={() => {this.sortArray("price", "asc")
+                this.SortPickerHandler()
+                }}>
                   <h2>price ascending</h2>
                 </li>
-                <li onClick={() => this.sortArray("price", "desc")}>
+                <li onClick={() => {this.sortArray("price", "desc")
+                this.SortPickerHandler()
+                }}>
                   <h2>price descending</h2>
                 </li>
               </ul>

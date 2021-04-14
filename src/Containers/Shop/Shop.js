@@ -17,6 +17,8 @@ class Shop extends Component {
     };
   }
 
+  
+
   render() {
     return (
       <div className="shop">

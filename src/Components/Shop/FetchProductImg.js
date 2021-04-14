@@ -5,11 +5,21 @@ const fetchProductImg = (props) => {
 
 const imgLink = "/Graphics/" + props.link + ".jpg"
 
+if (!props.link) {
   return (
-      <Aux>
-      <img className={props.className} src={imgLink} alt="logo" />
-      </Aux>
-  );
+
+    <div className={props.className + " placeholder"}></div>
+    
+);
+} else {
+  return (
+    <Aux>
+    <img className={props.className} src={imgLink} alt="logo" />
+    <div className={props.className + " placeholder"}></div>
+    </Aux>
+  )
+}
+  
 };
 
 export default fetchProductImg;
