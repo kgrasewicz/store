@@ -7,6 +7,7 @@ import TopImg from "./topImg.png";
 import _ from "lodash";
 import $ from "jquery";
 import Pagination from "../../Paginate.js";
+import PriceSlider from "./Slider";
 
 class ProductList extends Component {
   _isMounted = false;
@@ -21,6 +22,8 @@ class ProductList extends Component {
       totalPages: null,
       productList: [],
       category: "",
+      filters: [],
+      totalProducts: null,
     };
 
     this.props = props;
@@ -37,6 +40,29 @@ class ProductList extends Component {
       this._isMounted = true;
       this.fetchData(this.props.match.params.category);
     }
+
+    if (prevState.allProducts !== this.state.allProducts) {
+      this._isMounted = true;
+
+      this.setState({
+        currentPage: JSON.parse(window.localStorage.getItem("currentPage")) } )
+
+
+      const offset = (this.state.currentPage - 1) * 12;
+      this.setState(
+        {
+          currentProducts: this.state.allProducts.slice(offset, offset + 12),
+        },
+        () => {
+          this.setState({
+            totalPages: Math.ceil(this.state.allProducts.length / 12),
+
+          });
+        }
+      );
+
+      this._isMounted = false;
+    }
   };
 
   componentWillUnmount() {
@@ -52,16 +78,25 @@ class ProductList extends Component {
         this.setState({ allProducts: this.state.productList }, () => {
           this.setState({
             currentPage: JSON.parse(window.localStorage.getItem("currentPage")),
-          });
+          } );
+          
           const offset = (this.state.currentPage - 1) * 12;
           this.setState({
             currentProducts: this.state.allProducts.slice(offset, offset + 12),
           });
+
+
+          this.setState({
+            totalPages: Math.ceil(this.state.allProducts.length / 12),
+            
+          });
+
           console.log("why");
           axios.get("/api/cart").then((response) => {
             $(".items-counter h5").text(response.data.itemsTotal);
 
             console.log(response);
+
           });
         });
       }
@@ -69,7 +104,7 @@ class ProductList extends Component {
   };
 
   SortPickerHandler = () => {
-    $(".products-container__tooltip__sort-container arrow").toggleClass(
+    $(".products-container__tooltip__sort-container .arrow").toggleClass(
       "active"
     );
     $(".products-container__tooltip__sort-container__list").toggleClass(
@@ -92,19 +127,12 @@ class ProductList extends Component {
           });
           console.log("why");
 
+          this.setState({ allProducts: this.state.productList });
+          console.log(this.state.allProducts.length)
           this.sortArray("product_name", "asc");
 
-          this.setState({ allProducts: this.state.productList });
-
-          const { currentPage, totalPages, pageLimit } = this.state.data;
-
-          const offset = (currentPage - 1) * pageLimit;
-          const currentProducts = this.state.allProducts.slice(
-            offset,
-            offset + pageLimit
-          );
-
-          this.setState({ currentPage, currentProducts, totalPages });
+          
+          console.log(this.state.totalPages);
         }
       })
       .catch((error) => {
@@ -127,10 +155,61 @@ class ProductList extends Component {
     }
   };
 
+  filterHandler = () => {
+    $(".products-container__tooltip__filter-container__dashboard").toggleClass(
+      "active"
+    );
+    $(".products-container__tooltip__filter-container__top .arrow").toggleClass(
+      "active"
+    );
+  };
+
+  selectFilterHandler = (event) => {
+    console.log(event.target);
+    if (!event.target.checked) {
+      this.state.filters.push({
+        filters: [event.target.value, event.target.name],
+      });
+    } else {
+      const index = this.state.filters.findIndex(
+        (x) => x.filters[1] === event.target.name
+      );
+
+      if (index > -1) {
+        this.state.filters.splice(index, 1);
+      }
+    }
+
+    this.setState(this.state.filters);
+
+    const filtersObject = this.state.filters;
+
+    this.setState({
+      allProducts: this.state.productList.filter(function (item) {
+        if (filtersObject.length > 0) {
+          for (var i = 0; i < filtersObject.length; i++) {
+            if (
+              item[filtersObject[i].filters[0]] !== undefined &&
+              item[filtersObject[i].filters[0]] == filtersObject[i].filters[1]
+            ) {
+              return false;
+            }
+
+            return true;
+          }
+        } else {
+          return true;
+        }
+      }),
+    });
+  };
+
   onPageChanged = (data) => {
     const { allProducts } = this.state;
     const { currentPage, totalPages, pageLimit } = data;
     const offset = (currentPage - 1) * pageLimit;
+
+    console.log(totalPages)
     const currentProducts = allProducts.slice(offset, offset + pageLimit);
 
     this.setState({ currentPage, currentProducts, totalPages });
@@ -140,11 +219,11 @@ class ProductList extends Component {
 
   render() {
     const { allProducts, currentProducts, currentPage } = this.state;
-    const totalProducts = allProducts.length;
+    console.log(this.state.allProducts.length)
 
     localStorage.setItem("currentPage", JSON.stringify(currentPage));
-
-    if (totalProducts === 0) return null;
+    console.log(this.state.allProducts)
+    if (allProducts.length === 0) return null;
 
     const products = currentProducts.map((product) => (
       <NavLink
@@ -172,10 +251,11 @@ class ProductList extends Component {
       <Aux>
         <img className="shop__topImg" src={TopImg} alt="graphics" />
         <Pagination
-          totalRecords={totalProducts}
+          totalRecords={this.state.allProducts.length}
           pageLimit={12}
           pageNeighbours={1}
           onPageChanged={this.onPageChanged}
+          allProductsKey={this.state.allProducts.length}
         />
         <div className="products-container">
           <div className="products-container__tooltip">
@@ -197,28 +277,122 @@ class ProductList extends Component {
               <ul className="products-container__tooltip__sort-container__list">
                 <li
                   onClick={() => {
-                    this.sortArray("product_name", "asc")
-                    this.SortPickerHandler()
+                    this.sortArray("product_name", "asc");
+                    this.SortPickerHandler();
                   }}
                 >
                   <h2>product name ascending</h2>
                 </li>
-                <li onClick={() => {this.sortArray("product_name", "desc")
-                this.SortPickerHandler()
-                }}>
+                <li
+                  onClick={() => {
+                    this.sortArray("product_name", "desc");
+                    this.SortPickerHandler();
+                  }}
+                >
                   <h2>product name descending</h2>
                 </li>
-                <li onClick={() => {this.sortArray("price", "asc")
-                this.SortPickerHandler()
-                }}>
+                <li
+                  onClick={() => {
+                    this.sortArray("price", "asc");
+                    this.SortPickerHandler();
+                  }}
+                >
                   <h2>price ascending</h2>
                 </li>
-                <li onClick={() => {this.sortArray("price", "desc")
-                this.SortPickerHandler()
-                }}>
+                <li
+                  onClick={() => {
+                    this.sortArray("price", "desc");
+                    this.SortPickerHandler();
+                  }}
+                >
                   <h2>price descending</h2>
                 </li>
               </ul>
+            </div>
+
+            <div className="products-container__tooltip__filter-container">
+              <div
+                className="products-container__tooltip__filter-container__top"
+                onClick={this.filterHandler}
+              >
+                <h2 className="products-container__tooltip__filter-container__top__title">
+                  Filter:
+                </h2>
+
+                <h2 className="products-container__tooltip__filter-container__top__value"></h2>
+                <div className="arrow"></div>
+              </div>
+              <div className="products-container__tooltip__filter-container__dashboard">
+                <div className="products-container__tooltip__filter-container__dashboard__price-container">
+                  <h2 className="products-container__tooltip__filter-container__dashboard__price-container__title">
+                    Price range:
+                  </h2>
+                  <PriceSlider
+                    minValue={Math.min.apply(
+                      Math,
+                      this.state.products.map(function (product) {
+                        return product.price;
+                      })
+                    )}
+                    maxValue={Math.max.apply(
+                      Math,
+                      this.state.products.map(function (product) {
+                        return product.price;
+                      })
+                    )}
+                  />
+                </div>
+                <div className="products-container__tooltip__filter-container__dashboard__material-container">
+                  <h2 className="products-container__tooltip__filter-container__dashboard__material-container__title">
+                    Material:
+                  </h2>
+                  <label>
+                    <input
+                      onChange={this.selectFilterHandler}
+                      type="checkbox"
+                      name="gold"
+                      value="material"
+                      defaultChecked="true"
+                    />
+                    <h2>Gold</h2>
+                  </label>
+                  <label>
+                    <input
+                      onChange={this.selectFilterHandler}
+                      type="checkbox"
+                      name="silver"
+                      value="material"
+                      defaultChecked="true"
+                    />
+                    <h2>Silver</h2>
+                  </label>
+                </div>
+                <div className="products-container__tooltip__filter-container__dashboard__collection-container">
+                  <h2 className="products-container__tooltip__filter-container__dashboard__collection-container__title">
+                    Collection:
+                  </h2>
+                  <label>
+                    <input
+                      onChange={this.selectFilterHandler}
+                      type="checkbox"
+                      name="Casablanca"
+                      value="collection_name"
+                      defaultChecked="true"
+                    />
+                    <h2>Casablanca</h2>
+                  </label>
+                  <label>
+                    <input
+                      onChange={this.selectFilterHandler}
+                      type="checkbox"
+                      name="Marocco"
+                      value="collection_name"
+                      defaultChecked="true"
+                    />
+                    <h2>Marocco</h2>
+                  </label>
+                </div>
+              </div>
             </div>
           </div>
           <div className="products-container__list">{products}</div>

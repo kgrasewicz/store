@@ -27,6 +27,18 @@ class Pagination extends Component {
       this.state = { currentPage: 1 };
     }
 
+
+    componentDidUpdate = (prevProps, prevState) => {
+      if (prevProps.allProductsKey !== this.props.allProductsKey) {
+        this.totalRecords = this.props.totalRecords
+        console.log(this.totalRecords)
+        this.totalPages = this.props.totalRecords/12
+        console.log(this.totalRecords)
+        console.log(this.totalPages)
+        console.log("aldlkfj")
+    }
+  }
+
     fetchPageNumbers = () => {
         const totalPages = this.totalPages;
         const currentPage = this.state.currentPage;
@@ -89,8 +101,8 @@ class Pagination extends Component {
         const pages = this.fetchPageNumbers();
     
         return (
-          <Fragment>
-            <div className="pagination-container" aria-label="Pagination">
+          <Fragment key={this.allProductsKey}>
+            <div className="pagination-container"  aria-label="Pagination">
               <ul className="pagination">
                 { pages.map((page, index) => {
     
@@ -166,7 +178,8 @@ class Pagination extends Component {
     totalRecords: PropTypes.number.isRequired,
     pageLimit: PropTypes.number,
     pageNeighbours: PropTypes.number,
-    onPageChanged: PropTypes.func
+    onPageChanged: PropTypes.func,
+    allProductsKey: PropTypes.number
   };
 
   
