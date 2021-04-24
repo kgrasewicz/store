@@ -4,6 +4,7 @@ import CartIcon from './CartIcon';
 import Aux from "react-aux";
 import Logo from "../Logo/Logo"
 import TopMenu from "../TopMenu/TopMenu"
+import Search from "./Search"
 
 
 const topTooltip = (props) => {
@@ -22,7 +23,7 @@ const topTooltip = (props) => {
       <li><NavLink to={'/shop/bracelets'} onClick={props.clickHandler} activeClassName='is-active'><h2>bracelets</h2></NavLink></li>
       <li><NavLink to={'/shop/earrings'} onClick={props.clickHandler} activeClassName='is-active'><h2>earrings</h2></NavLink></li>
     </ul>
-    
+    <Search />
     <CartIcon />
     </div>
     </Aux>

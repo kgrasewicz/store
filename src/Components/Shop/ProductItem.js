@@ -115,7 +115,7 @@ class ProductItem extends Component {
           this.state.stock.length === 1
             ? "One size"
             : sessionStorage.getItem("chosenSize"),
-        price: this.state.product.price,
+        price: this.state.product.price - this.state.product.discount_val,
         quantity: 1,
       })
       .then(
@@ -140,7 +140,18 @@ class ProductItem extends Component {
   };
 
   cartHandler = (event) => {
-    this.addToCart();
+    console.log(!sessionStorage.getItem("chosenSize"))
+    let chosenSize = (sessionStorage.getItem("chosenSize") === "One Size" || !sessionStorage.getItem("chosenSize")) ? 1 : sessionStorage.getItem("chosenSize");
+    console.log(chosenSize)
+    console.log(this.state.product.stock.findIndex(
+      (x) => x.size == chosenSize))
+    let index = this.state.product.stock.findIndex(
+      (x) => x.size == chosenSize)
+      
+    if (this.state.product.stock[index].quantity > 0) {
+      this.addToCart();
+    }
+    
 
     $(".pop-cart-continue").toggleClass("active");
   };
@@ -236,9 +247,12 @@ class ProductItem extends Component {
           <div className="product-item-container__info">
             <div className="product-item-container__info__main">
               <h4>{this.state.product.product_name}</h4>
-              <h4 className="product-item-container__info__main__price">
+              <div className="product-item-container__info__main__price-container">
+              <h4 className={(this.state.product.discount_val > 0) ? "product-item-container__info__main__price-container__old-price" : "product-item-container__info__main__price-container__price"}>
                 {this.state.product.price} PLN
               </h4>
+              <h4 className="product-item-container__info__main__price-container__new-price">{this.state.product.discount_val > 0 ? this.state.product.price - this.state.product.discount_val + " PLN" : ""}</h4>
+              </div>
               <h3>Model: {this.state.product.product_id}</h3>
             </div>
             <div className="product-item-container__info__desc">

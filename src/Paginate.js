@@ -23,19 +23,16 @@ class Pagination extends Component {
         : 0;
   
       this.totalPages = Math.ceil(this.totalRecords / this.pageLimit);
-  
+    
       this.state = { currentPage: 1 };
     }
 
 
     componentDidUpdate = (prevProps, prevState) => {
-      if (prevProps.allProductsKey !== this.props.allProductsKey) {
+      if (prevProps.totalRecords !== this.props.totalRecords) {
         this.totalRecords = this.props.totalRecords
-        console.log(this.totalRecords)
-        this.totalPages = this.props.totalRecords/12
-        console.log(this.totalRecords)
-        console.log(this.totalPages)
-        console.log("aldlkfj")
+        this.totalPages = Math.ceil(this.totalRecords / this.pageLimit)
+        this.gotoPage(1);
     }
   }
 
@@ -54,8 +51,8 @@ class Pagination extends Component {
         if (totalPages > totalBlocks) {
           const startPage = Math.max(2, currentPage - pageNeighbours);
           const endPage = Math.min(totalPages - 1, currentPage + pageNeighbours);
-          let pages = _.range(startPage, endPage);
-    
+          let pages = _.range(startPage, endPage + 1);
+          console.log(pages)
           /**
            * hasLeftSpill: has hidden pages to the left
            * hasRightSpill: has hidden pages to the right
@@ -68,14 +65,14 @@ class Pagination extends Component {
           switch (true) {
             // handle: (1) < {5 6} [7] {8 9} (10)
             case (hasLeftSpill && !hasRightSpill): {
-              const extraPages = _.range(startPage - spillOffset, startPage - 1);
+              const extraPages = _.range(startPage - spillOffset, startPage);
               pages = [LEFT_PAGE, ...extraPages, ...pages];
               break;
             }
     
             // handle: (1) {2 3} [4] {5 6} > (10)
             case (!hasLeftSpill && hasRightSpill): {
-              const extraPages = _.range(endPage + 1, endPage + spillOffset);
+              const extraPages = _.range(endPage + 1, endPage + spillOffset + 1);
               pages = [...pages, ...extraPages, RIGHT_PAGE];
               break;
             }
@@ -91,7 +88,7 @@ class Pagination extends Component {
           return [1, ...pages, totalPages];
         }
     
-        return _.range(1, totalPages);
+        return _.range(1, totalPages + 1);
       }
 
       render() {
@@ -101,25 +98,23 @@ class Pagination extends Component {
         const pages = this.fetchPageNumbers();
     
         return (
-          <Fragment key={this.allProductsKey}>
+          <Fragment>
             <div className="pagination-container"  aria-label="Pagination">
               <ul className="pagination">
                 { pages.map((page, index) => {
     
                   if (page === LEFT_PAGE) return (
-                    <li key={index} className="page-item">
-                      <a className="page-link link-2" href="#" aria-label="Previous" onClick={this.handleMoveLeft}>
-                        <span aria-hidden="true">&laquo;</span>
-                        <span className="sr-only"><h3>Previous</h3></span>
+                    <li key={index} className="page-item previous">
+                      <a className="page-link link-2 previous" href="#" aria-label="Previous" onClick={this.handleMoveLeft}>
+                        <div aria-hidden="true"><h3>&#171;</h3></div>
                       </a>
                     </li>
                   );
     
                   if (page === RIGHT_PAGE) return (
-                    <li key={index} className="page-item">
-                      <a className="page-link link-2" href="#" aria-label="Next" onClick={this.handleMoveRight}>
-                        <span aria-hidden="true">&raquo;</span>
-                        <span className="sr-only"><h3>Next</h3></span>
+                    <li key={index} className="page-item next">
+                      <a className="page-link link-2 next" href="#" aria-label="Next" onClick={this.handleMoveRight}>
+                        <div aria-hidden="true"><h3>&#187;</h3></div>
                       </a>
                     </li>
                   );
@@ -164,12 +159,12 @@ class Pagination extends Component {
 
   handleMoveLeft = evt => {
 
-    this.gotoPage(this.state.currentPage - (this.pageNeighbours * 2) - 1);
+    this.gotoPage(this.state.currentPage - 1);
   }
 
   handleMoveRight = evt => {
 
-    this.gotoPage(this.state.currentPage + (this.pageNeighbours * 2) + 1);
+    this.gotoPage(this.state.currentPage + 1);
   }
     
   }
@@ -179,7 +174,6 @@ class Pagination extends Component {
     pageLimit: PropTypes.number,
     pageNeighbours: PropTypes.number,
     onPageChanged: PropTypes.func,
-    allProductsKey: PropTypes.number
   };
 
   

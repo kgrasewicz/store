@@ -20,12 +20,23 @@ class Shop extends Component {
   
 
   render() {
+
+    
     return (
       <div className="shop">
-        <TopTooltip />
+        <TopTooltip clickHandler={() => document.querySelector(".search-container__input").value = ""}/>
 
         <BottomInfo />
 
+
+
+        <h4 className="search-no-results">
+          Unfortunately, we could not find any product matching your request.
+        </h4>
+
+        <div className="search-loader-container">
+        <div className="search-loader">Loading...</div>
+        </div>
 
         {this.props.children}
 

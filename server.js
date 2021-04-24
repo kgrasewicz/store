@@ -1,6 +1,7 @@
 import connectDB from "./backend/config/db.js";
 import productRoutes from "./backend/routes/productRoute.js";
 import cartRoutes from "./backend/routes/cartRoute.js";
+import couponsRoutes from "./backend/routes/couponRoute.js";
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
@@ -30,6 +31,7 @@ app.use(
 );
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
+app.use("api/coupons", couponsRoutes);
 app.use(function (req, res, next){
     res.locals.session = req.session
 })

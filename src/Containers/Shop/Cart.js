@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 import FetchProductImg from "../../Components/Shop/FetchProductImg";
-import $ from "jquery"
+import $ from "jquery";
+import Promocode from "../../Components/Shop/Promocode";
 
 class Cart extends Component {
   _isMounted = false;
@@ -151,7 +152,7 @@ class Cart extends Component {
           </li>
         ));
       } else {
-        cart = <li>The cart is empty</li>
+        cart = <li className="cart-container__table__products__item__line__empty">The cart is empty</li>
       }
 
       return cart;
@@ -275,12 +276,29 @@ class Cart extends Component {
             </li>
           </ul>
           <ul className="cart-container__table__products">{<CartMapping />}</ul>
+          <Promocode />
+          <div className="cart-container__table__subtotal">
+            <h3 className="cart-container__table__subtotal__title">Subtotal:</h3>
+
+            <h4 className="cart-container__table__subtotal__value">
+              {this.state.cart.subTotal || 0} PLN
+            </h4>
+          </div>
+
+          <div className="cart-container__table__discount">
+            <h3 className="cart-container__table__discount__title">Discount:</h3>
+
+            <h4 className="cart-container__table__discount__value">
+              {this.state.cart.subTotal || 0} PLN
+            </h4>
+          </div>
+
           <div className="cart-container__table__total">
             <h2 className="cart-container__table__total__title">Total:</h2>
-            <h2 className="cart-container__table__total__value">
+            <h2 className="cart-container__table__total__items">
               {this.state.cart.itemsTotal || 0} items
             </h2>
-            <h1 className="cart-container__table__total__items">
+            <h1 className="cart-container__table__total__value">
               {this.state.cart.subTotal || 0} PLN
             </h1>
           </div>

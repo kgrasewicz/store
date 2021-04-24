@@ -1,8 +1,16 @@
-import React from "react";
+import React, {useEffect, useRef, useLayoutEffect} from "react";
 import { Slider, RangeSlider } from 'rsuite';
 
 function PriceSlider (props) {
     const [value, setValue] = React.useState([props.minValue, props.maxValue]);
+
+ 
+  //   useLayoutEffect(() => {
+  //     props.clickHandlerStart()
+  //     props.clickHandlerEnd()
+  //  }, [value]);
+
+
     return (
       <div className="price-slider">
         <div className="price-slider__range">
@@ -16,33 +24,42 @@ function PriceSlider (props) {
             onChange={value => {
               setValue(value);
             }}
+            onClick={props.clickHandler}
           />
         </div>
         <div className="price-slider__inputs">
             <input
+            className="price-slider__inputs__start price-slider__inputs__child"
               min={props.minValue}
               max={props.maxValue}
+              name="price"
               value={value[0]}
               onChange={nextValue => {
                 const [start, end] = value;
-                if (nextValue > end) {
-                  return;
-                }
-                setValue([nextValue, end]);
+                
+                setValue([+nextValue.target.value, end]);
+                setTimeout( () => props.clickHandler(), 2000)
               }}
+
+              
             />
             <h2>to</h2>
             <input
+            className="price-slider__inputs__end price-slider__inputs__child"
               min={props.minValue}
               max={props.maxValue}
+              name="price"
               value={value[1]}
               onChange={nextValue => {
                 const [start, end] = value;
-                if (start > nextValue) {
-                  return;
-                }
-                setValue([start, nextValue]);
+                
+                setValue([start, +nextValue.target.value]);
+
+                
+                setTimeout( () => props.clickHandler(), 2000)
               }}
+
+
             />
         </div>
       </div>

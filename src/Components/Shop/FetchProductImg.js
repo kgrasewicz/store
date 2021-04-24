@@ -15,7 +15,7 @@ if (!props.link) {
   return (
     <Aux>
     <img className={props.className} src={imgLink} alt="logo" />
-    <div className={props.className + " placeholder"}></div>
+    <div className={props.className + " placeholder"} id="placeholder"></div>
     </Aux>
   )
 }

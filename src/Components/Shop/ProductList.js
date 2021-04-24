@@ -8,6 +8,8 @@ import _ from "lodash";
 import $ from "jquery";
 import Pagination from "../../Paginate.js";
 import PriceSlider from "./Slider";
+import { truncate } from "lodash";
+import { useHistory } from "react-router-dom";
 
 class ProductList extends Component {
   _isMounted = false;
@@ -24,6 +26,7 @@ class ProductList extends Component {
       category: "",
       filters: [],
       totalProducts: null,
+      searchQuery: [""],
     };
 
     this.props = props;
@@ -45,8 +48,8 @@ class ProductList extends Component {
       this._isMounted = true;
 
       this.setState({
-        currentPage: JSON.parse(window.localStorage.getItem("currentPage")) } )
-
+        currentPage: JSON.parse(window.localStorage.getItem("currentPage")),
+      });
 
       const offset = (this.state.currentPage - 1) * 12;
       this.setState(
@@ -56,7 +59,6 @@ class ProductList extends Component {
         () => {
           this.setState({
             totalPages: Math.ceil(this.state.allProducts.length / 12),
-
           });
         }
       );
@@ -70,38 +72,120 @@ class ProductList extends Component {
   }
 
   sortArray = (method, order) => {
+
+
     this.setState(
       {
-        productList: _.orderBy(this.state.products, [method], [order]),
+        allProducts: _.orderBy(this.state.allProducts, [method], [order]),
       },
       () => {
-        this.setState({ allProducts: this.state.productList }, () => {
-          this.setState({
-            currentPage: JSON.parse(window.localStorage.getItem("currentPage")),
-          } );
-          
-          const offset = (this.state.currentPage - 1) * 12;
-          this.setState({
-            currentProducts: this.state.allProducts.slice(offset, offset + 12),
-          });
+        this.setState({
+          currentPage: JSON.parse(window.localStorage.getItem("currentPage")),
+        });
 
+        const offset = (this.state.currentPage - 1) * 12;
+        this.setState({
+          currentProducts: this.state.allProducts.slice(offset, offset + 12),
+        });
 
-          this.setState({
-            totalPages: Math.ceil(this.state.allProducts.length / 12),
-            
-          });
+        this.setState({
+          totalPages: Math.ceil(this.state.allProducts.length / 12),
+        });
 
-          console.log("why");
-          axios.get("/api/cart").then((response) => {
-            $(".items-counter h5").text(response.data.itemsTotal);
+        $(".products-container__tooltip__sort-container__top__default").text(
+          method.split("_").join(" ") + " " + order + "ending"
+        );
 
-            console.log(response);
+        axios.get("/api/cart").then((response) => {
+          $(".items-counter h5").text(response.data.itemsTotal);
 
-          });
+          console.log(response);
         });
       }
     );
   };
+
+  searchHandler = () => {
+
+
+
+    $(".products-container").css("display","none")
+    this.setState(
+      {
+        searchQuery: document.querySelector(".search-container__input").value.split(" "),
+        
+      },
+      
+
+      this.searchEngine, 
+
+    );
+  };
+
+  searchEngine = () => {
+
+    function hammingDistance(str1, str2) {
+      var dist = 0;
+      str1 = str1.toLowerCase();
+      str2 = str2.toLowerCase();
+      for (var i = 0, j = Math.max(str1.length, str2.length); i < j; i++) {
+        if (!str1[i] || !str2[i] || str1[i] !== str2[i]) {
+          dist++;
+        }
+      }
+      return dist;
+    }
+
+    console.log(this.state.searchQuery);
+    let query = this.state.searchQuery;
+
+    this.setState({
+      allProducts: this.state.products.filter(function (item) {
+        if (
+          query[0] != ""
+        ) {
+          let index = [];
+
+          for (var i = 0; i < query.length; i++) {
+            if (
+              item.tags.findIndex((x) =>
+                hammingDistance(x, query[i]) <= 1
+                  ? true
+                  : false
+              ) > -1
+            ) {
+              index.push(1);
+            }
+
+            console.log(query[i]);
+          }
+          console.log(index);
+
+          console.log(index.length);
+          console.log(query.length);
+
+          
+          if (index.length <  query.length) {
+            return false;
+          } else {
+            return true;
+          }
+        } else {
+          return true;
+        }
+
+      }),
+    }, () => {
+      console.log(this.state.allProducts.length)
+      if (this.state.allProducts.length == 0) {
+        $(".search-no-results").addClass("active")
+      }
+    });
+    
+
+
+    $(".products-container").css("display","grid")
+  }
 
   SortPickerHandler = () => {
     $(".products-container__tooltip__sort-container .arrow").toggleClass(
@@ -121,18 +205,21 @@ class ProductList extends Component {
             products: response.data.filter((filteredProduct) => {
               return (
                 filteredProduct.category ===
-                (category === "all" ? filteredProduct.category : category)
+                (category === "all" || category.startsWith("search")
+                  ? filteredProduct.category
+                  : category)
               );
             }),
           });
-          console.log("why");
 
-          this.setState({ allProducts: this.state.productList });
-          console.log(this.state.allProducts.length)
+          this.setState({ allProducts: this.state.products });
+
+          this.searchHandler();
+
+
+
           this.sortArray("product_name", "asc");
-
-          
-          console.log(this.state.totalPages);
+          console.log("line");
         }
       })
       .catch((error) => {
@@ -165,19 +252,37 @@ class ProductList extends Component {
   };
 
   selectFilterHandler = (event) => {
-    console.log(event.target);
-    if (!event.target.checked) {
-      this.state.filters.push({
-        filters: [event.target.value, event.target.name],
-      });
+    if (!event.classList) {
+      if (!event.target.checked) {
+        this.state.filters.push({
+          filters: [event.target.name, event.target.value],
+        });
+      } else {
+        const index = this.state.filters.findIndex(
+          (x) => x.filters[1] === event.target.value
+        );
+
+        if (index > -1) {
+          this.state.filters.splice(index, 1);
+        }
+      }
     } else {
       const index = this.state.filters.findIndex(
-        (x) => x.filters[1] === event.target.name
+        (x) => x.filters[0] === $(event).attr("name")
       );
 
       if (index > -1) {
         this.state.filters.splice(index, 1);
       }
+
+      this.state.filters.push({
+        filters: [
+          $(event).attr("name"),
+          $(".price-slider__inputs__start").val() +
+            "," +
+            $(".price-slider__inputs__end").val(),
+        ],
+      });
     }
 
     this.setState(this.state.filters);
@@ -185,23 +290,46 @@ class ProductList extends Component {
     const filtersObject = this.state.filters;
 
     this.setState({
-      allProducts: this.state.productList.filter(function (item) {
+      allProducts: this.state.products.filter(function (item) {
         if (filtersObject.length > 0) {
           for (var i = 0; i < filtersObject.length; i++) {
-            if (
-              item[filtersObject[i].filters[0]] !== undefined &&
-              item[filtersObject[i].filters[0]] == filtersObject[i].filters[1]
-            ) {
-              return false;
+            if (filtersObject[i].filters[0] === "price") {
+              console.log(filtersObject[i].filters[1].split(",")[0]);
+              console.log(filtersObject[i].filters[1].split(",")[1]);
+              console.log(item.price);
+              console.log(
+                item.price !== undefined &&
+                  item.price >= filtersObject[i].filters[1].split(",")[0] &&
+                  item.price <= filtersObject[i].filters[1].split(",")[1]
+              );
+              if (
+                item.price === undefined ||
+                (item.price >= filtersObject[i].filters[1].split(",")[0] &&
+                  item.price <= filtersObject[i].filters[1].split(",")[1])
+              ) {
+                console.log("fffalse");
+                return true;
+              } else {
+                console.log("tttruee");
+                return false;
+              }
+            } else {
+              if (
+                item[filtersObject[i].filters[0]] !== undefined &&
+                item[filtersObject[i].filters[0]] == filtersObject[i].filters[1]
+              ) {
+                return false;
+              } else {
+                return true;
+              }
             }
-
-            return true;
           }
         } else {
           return true;
         }
       }),
     });
+
   };
 
   onPageChanged = (data) => {
@@ -209,7 +337,6 @@ class ProductList extends Component {
     const { currentPage, totalPages, pageLimit } = data;
     const offset = (currentPage - 1) * pageLimit;
 
-    console.log(totalPages)
     const currentProducts = allProducts.slice(offset, offset + pageLimit);
 
     this.setState({ currentPage, currentProducts, totalPages });
@@ -218,11 +345,19 @@ class ProductList extends Component {
   };
 
   render() {
+    $(".search-container__arrow").on("click", () => this.props.history.push('/shop/search&' + $('.search-container__input').val().split(" ").join("&")));
+    console.log(this.props.match.params.category)
+    $(".search-container__input").keyup((event) => {
+      if (event.which === 13)
+      {
+        this.props.history.push('/shop/search&' + $('.search-container__input').val().split(" ").join("&"));
+    }
+  })
+        
     const { allProducts, currentProducts, currentPage } = this.state;
-    console.log(this.state.allProducts.length)
 
     localStorage.setItem("currentPage", JSON.stringify(currentPage));
-    console.log(this.state.allProducts)
+
     if (allProducts.length === 0) return null;
 
     const products = currentProducts.map((product) => (
@@ -242,14 +377,37 @@ class ProductList extends Component {
         />
         <div className="products-container__list__product__label">
           <h2>{product.product_name}</h2>
-          <h3>{product.price} PLN</h3>
+          <div className="products-container__list__product__label__price-container">
+            <h3
+              className={
+                product.discount_val > 0
+                  ? "products-container__list__product__label__price-container__old-price"
+                  : "products-container__list__product__label__price-container__price"
+              }
+            >
+              {product.price} PLN
+            </h3>
+            <h3 className="products-container__list__product__label__price-container__new-price">
+              {product.discount_val > 0
+                ? product.price - product.discount_val + " PLN"
+                : ""}
+            </h3>
+          </div>
         </div>
       </NavLink>
     ));
 
+    const ProductsContainerTitle = () => {
+      if (this.props.match.params.category.startsWith("search")) {
+        return <h4>Search results for: {$(".search-container__input").val()}</h4>
+      } else {
+        return <h4>Collection</h4>
+      }
+    }
+
     return (
       <Aux>
-        <img className="shop__topImg" src={TopImg} alt="graphics" />
+
         <Pagination
           totalRecords={this.state.allProducts.length}
           pageLimit={12}
@@ -259,7 +417,7 @@ class ProductList extends Component {
         />
         <div className="products-container">
           <div className="products-container__tooltip">
-            <h4>collection</h4>
+            <ProductsContainerTitle />
             <div className="products-container__tooltip__sort-container">
               <div
                 onClick={this.SortPickerHandler}
@@ -328,6 +486,7 @@ class ProductList extends Component {
                     Price range:
                   </h2>
                   <PriceSlider
+                    name="price"
                     minValue={Math.min.apply(
                       Math,
                       this.state.products.map(function (product) {
@@ -340,6 +499,16 @@ class ProductList extends Component {
                         return product.price;
                       })
                     )}
+                    clickHandler={() =>
+                      this.selectFilterHandler(
+                        document.querySelector(".price-slider__inputs__start")
+                      )
+                    }
+                    clickHandler={() =>
+                      this.selectFilterHandler(
+                        document.querySelector(".price-slider__inputs__end")
+                      )
+                    }
                   />
                 </div>
                 <div className="products-container__tooltip__filter-container__dashboard__material-container">
@@ -350,8 +519,8 @@ class ProductList extends Component {
                     <input
                       onChange={this.selectFilterHandler}
                       type="checkbox"
-                      name="gold"
-                      value="material"
+                      name="material"
+                      value="gold"
                       defaultChecked="true"
                     />
                     <h2>Gold</h2>
@@ -360,8 +529,8 @@ class ProductList extends Component {
                     <input
                       onChange={this.selectFilterHandler}
                       type="checkbox"
-                      name="silver"
-                      value="material"
+                      name="material"
+                      value="silver"
                       defaultChecked="true"
                     />
                     <h2>Silver</h2>
@@ -375,8 +544,8 @@ class ProductList extends Component {
                     <input
                       onChange={this.selectFilterHandler}
                       type="checkbox"
-                      name="Casablanca"
-                      value="collection_name"
+                      name="collection_name"
+                      value="Casablanca"
                       defaultChecked="true"
                     />
                     <h2>Casablanca</h2>
@@ -385,8 +554,8 @@ class ProductList extends Component {
                     <input
                       onChange={this.selectFilterHandler}
                       type="checkbox"
-                      name="Marocco"
-                      value="collection_name"
+                      name="collection_name"
+                      value="Marocco"
                       defaultChecked="true"
                     />
                     <h2>Marocco</h2>

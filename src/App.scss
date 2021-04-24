@@ -6,6 +6,7 @@ $color-tertiary-red: #dc2121;
 $color-hover-grey: #f3f3f3;
 $color-text-white: #ffffff;
 $color-text-grey: #626262;
+$color-border-grey: #cecece;
 
 body {
   background: $color-primary-grey;
@@ -37,7 +38,7 @@ input {
   outline: none;
   border-radius: 0;
   text-decoration: none;
-  border: 1px solid $color-text-grey;
+  border: 1px solid $color-border-grey;
 }
 
 h1 {
@@ -112,8 +113,6 @@ h4 {
     }
   }
 }
-
-
 
 .newsletter-info {
   background: $color-primary-grey;
@@ -262,7 +261,7 @@ h4 {
   position: fixed;
   bottom: 0;
   height: 7vh;
-  border-top: 1px solid $color-secondary-black;
+  border-top: 1px solid $color-border-grey;
   background: $color-primary-grey;
   z-index: 0;
   align-self: end;
@@ -382,20 +381,16 @@ div.Casablanca {
 
 
 .top-menu {
-  .is-active {
-    position: relative;
 
-    &::after {
-      width: 5px;
-      height: 5px;
-      background: $color-primary-grey;
-      content: "";
-      position: absolute;
-      top: 50%;
-      right: -15px;
-      z-index: 1000000;
-      border-radius: 50%;
-    }
+  li a {
+    border-bottom: none;
+  }
+
+  li a.is-active.menu-font {
+
+
+      color: $color-tertiary-red;
+
   }
 }
 
@@ -404,7 +399,7 @@ div.Casablanca {
   display: grid;
   height: auto;
   width: 100vw;
-  grid-template: 8vh repeat(3, auto) 7vh/ 5vw 1fr 5vw;
+  grid-template: 8vh repeat(2, auto) 7vh/ 5vw 1fr 5vw;
   overflow-y: hidden;
   top: 0;
   position: absolute;
@@ -416,14 +411,16 @@ div.Casablanca {
     height: 6vh;
     width: 90vw;
     grid-auto-flow: column;
-    grid-template: 6vh / calc(15rem + 0.5vw) auto calc(2rem + 0.5vw) calc(
-        5rem + 0.5vw
+    grid-template: 6vh / calc(15rem + 0.5vw) auto calc(50rem + 0.5vw) calc(2rem + 0.5vw) calc(
+        2.3rem + 0.5vw
       );
-    border-bottom: 1px solid $color-secondary-black;
+    border-bottom: 1px solid $color-border-grey;
     position: fixed;
     background: $color-primary-grey;
     padding: 0 5vw;
     align-items: center;
+    column-gap: 15px;
+    z-index: 2;
 
     &__list {
       display: grid;
@@ -436,7 +433,114 @@ div.Casablanca {
       li {
         display: grid;
         align-items: center;
+
+        a {
+
+          &.is-active {
+            color: $color-tertiary-red;
+          }
+
+          &:hover {
+            color: $color-tertiary-red;
+          }
+          
+        }
       }
+    }
+
+    .search-container {
+      display: grid;
+      grid-auto-flow: column;
+      width: 4vh;
+      grid-template: 1fr / 4vh 1fr 4vh 4vh;
+      height: 4vh;      
+      overflow: hidden;
+      transition: .3s;
+      justify-self: end;
+
+
+
+      
+
+      &.active {
+        border-bottom: 1.5px solid $color-border-grey;
+        width: calc(50rem + .5vw);
+
+        &.focused {
+          border-bottom: 1.5px solid #000000;
+        }
+
+         .search-container__icon {
+          svg path {
+            fill: $color-text-grey;
+          }
+        }
+      }
+
+      input {
+        width: 100%;
+        padding-right: 0;
+        border: none;
+
+
+        
+
+      }
+
+
+
+
+      &__icon, &__close, &__arrow {
+        width: 4vh;
+        height: 4vh;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        
+
+        &:hover {
+          svg path {
+            fill: $color-tertiary-red;
+          }
+        }
+
+        svg {
+
+          width: calc(1.3rem + .5vw);
+
+          path {
+            fill: $color-secondary-black;
+          }
+
+        }
+      }
+
+      &__close.show, &__arrow.show {
+        display: grid;
+      }
+
+      &__close {
+        svg 
+        
+        {
+
+          height:80%;
+
+          path {
+          fill: $color-text-grey;
+          
+        }
+      }
+      }
+
+      &__close, &__arrow {
+        transform: scale(.9);
+        display: none;
+      }
+
+
+
+     
     }
 
     &__cart-logo {
@@ -447,6 +551,11 @@ div.Casablanca {
 
       svg {
         grid-area: 1 / 1 / span 1  / span 1;
+
+        path {
+          stroke: $color-secondary-black;
+          stroke-width: 1.6px;
+        }
       }
 
       .items-counter {
@@ -466,18 +575,23 @@ div.Casablanca {
     }
 
     .top-menu {
-      grid-area: 1 / 4 / span 1 / span 1;
+      grid-area: 1 / 5 / span 1 / span 1;
       display: grid;
       grid-template: 4vh auto / 1fr;
       z-index: 5;
       justify-self: end;
       align-self: start;
 
-      &__list li {
-        text-align: left;
-        line-height: 400%;
-      }
+      &__list
+      { padding: 20vh 30px;
+        display: grid;
 
+       li {
+        text-align: left;
+        line-height: 600%;
+
+      }
+    }
       &__icon {
         display: grid;
         grid-template: 1fr 1fr / 1fr;
@@ -493,7 +607,7 @@ div.Casablanca {
       &__icon-1,
       &__icon-2 {
         width: 20px;
-        height: 2px;
+        height: 1.6px;
         background: $color-secondary-black;
         z-index: 2;
         cursor: pointer;
@@ -508,7 +622,7 @@ div.Casablanca {
   }
 
   .pagination-container {
-    grid-area: 4 / 2 / span 1 / span 1;
+    grid-area: 3 / 2 / span 1 / span 1;
     display: grid;
     place-items: center;
     grid-template: 1fr / 1fr;
@@ -516,12 +630,13 @@ div.Casablanca {
     .pagination {
       display: grid;
       grid-auto-flow: column;
-      width: calc(20rem + .5vw);
       grid-area: 1 / 1 / span 1 / span 1;
       place-items: center;
+      column-gap: 10px;
 
       li {
         place-items: center;
+
 
         &.active {
 
@@ -530,6 +645,27 @@ div.Casablanca {
           }
           
         }
+
+        a {
+          &.next, &.previous {
+            display: grid;
+            grid-auto-flow: column;
+            grid-template: 1fr / auto auto;
+            place-items: center;
+            column-gap: 3px;
+  
+            div h3 {
+              transform: translate(0, -3%);
+              font-size: calc(1.5rem + .5vw)
+            }
+            
+          }
+
+
+        }
+
+        
+        
       }
     }
   }
@@ -537,17 +673,32 @@ div.Casablanca {
 
 
 .active.top-menu {
-  background: $color-secondary-black;
-  width: 10vw;
-  padding: 0 10px 10px 10px;
+  background: #ffffff;
+  width: calc(25vw - 20px);
+  padding: 0 10px 10px 0px;
+  height: 100vh;
+  position: fixed;
+  right: 0;
 
   &__list {
     display: grid;
   }
+
+  .top-menu__bcg {
+    position: fixed;
+    height: 100vh;
+    width: 75vw;
+    z-index: 1;
+    background: $color-secondary-black;
+    opacity: .3;
+    left: 0;
+    top: 0;
+
+  }
 }
 
 .active .top-menu__list li .menu-font {
-  color: $color-primary-grey;
+  color: $color-secondary-black;
 }
 
 .active .top-menu__list li .menu-font:hover {
@@ -569,7 +720,7 @@ div.Casablanca {
 
    div.top-menu__icon-1,
    div.top-menu__icon-2 {
-  background: $color-primary-grey;
+  background: $color-secondary-black;
   transform: rotate(45deg);
   transform-origin: center;
   grid-area: 1 / 1 / span 1 / span 1;
@@ -708,13 +859,112 @@ svg {
   width: 100%;
 }
 
+.search-no-results {
+  background: #ffffff;
+  grid-area: 2/2/span 2/span 1;
+  z-index: -3;
+  height: 80vh;
+  text-align: center;
+  line-height: 70vh;
+
+  &.active {
+    z-index: -1;
+  }
+}
+
+.search-loader-container {
+
+  background: $color-primary-grey;
+  grid-area: 2 / 2 / span 2 / span 1;
+  z-index: -2;
+  height: 80vh;
+
+  &.active {
+    display: block;
+  }
+
+  .search-loader {
+    color: $color-hover-grey;
+    font-size: 11px;
+    text-indent: -99999em;
+    margin: 55px auto;
+    position: absolute;
+    top: calc(50vh - 10em);
+    left: calc(50vw - 5em);
+    width: 10em;
+    height: 10em;
+    box-shadow: inset 0 0 0 1em;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    border-radius: 50%;
+
+    &:before {
+      border-radius: 50%;
+      position: absolute;
+  content: '';
+  width: 5.2em;
+  height: 10.2em;
+  background: $color-primary-grey;
+  border-radius: 10.2em 0 0 10.2em;
+  top: -0.1em;
+  left: -0.1em;
+  -webkit-transform-origin: 5.1em 5.1em;
+  transform-origin: 5.1em 5.1em;
+  -webkit-animation: load2 2s infinite ease 1.5s;
+  animation: load2 2s infinite ease 1.5s;
+    }
+
+    &:after {
+      border-radius: 50%;
+      position: absolute;
+      content: '';
+      width: 5.2em;
+      height: 10.2em;
+      background: $color-primary-grey;
+      border-radius: 0 10.2em 10.2em 0;
+      top: -0.1em;
+      left: 4.9em;
+      -webkit-transform-origin: 0.1em 5.1em;
+      transform-origin: 0.1em 5.1em;
+      -webkit-animation: load2 2s infinite ease;
+      animation: load2 2s infinite ease;
+    }
+
+  }
+
+@-webkit-keyframes load2 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load2 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+}
+
 .products-container {
   display: grid;
   grid-template: auto auto / 1fr;
-  grid-area: 3 / 2 / span 1 / span 1;
+  grid-area: 2 / 2 / span 1 / span 1;
   height: fit-content;
   align-items: center;
   padding-top: 50px;
+  background: $color-primary-grey;
+  z-index: 1;
 
   &__tooltip {
     height: 10vh;
@@ -826,7 +1076,7 @@ svg {
           }
 
           .rs-slider-bar {
-            background: #bfbfbf;
+            background: $color-border-grey;
             height: 4px;
           }
 
@@ -985,7 +1235,7 @@ svg {
           }
 
           &:not(:last-child) {
-            border-bottom: 1px solid #bfbfbf;
+            border-bottom: 1px solid $color-border-grey;
           }
         }
       }
@@ -1006,9 +1256,9 @@ svg {
     display: grid;
     place-items: center;
     grid-template-columns: repeat(4, 1fr);
-    column-gap: 20px;
+    column-gap: calc(5rem + .5vw);
     height: fit-content;
-    row-gap: 20px;
+    row-gap: calc(5rem + .5vw);
     grid-area: 2 / 1 / span 1 / span 1;
 
 
@@ -1069,10 +1319,12 @@ svg {
       .placeholder {
         background: $color-hover-grey;
         width: 100%;
+        min-width: 20vw;
         aspect-ratio: 1;
         grid-area: 1/1/span 1/span 1;
         z-index: -2;
-      }
+       
+    }
 
       &__label {
         grid-area: 2 / 1 / span 1 / span 1;
@@ -1084,6 +1336,13 @@ svg {
         width: 100%;
         padding: 10px 0;
 
+
+        &__price-container {
+        display: grid;
+        grid-auto-flow: column;
+        align-items: center;
+        column-gap: 5px;
+
         h2 {
           align-self: end;
           text-align: left;
@@ -1091,11 +1350,34 @@ svg {
           font-size: calc(1rem + 0.5vw);
         }
 
-        h3 {
-          align-self: start;
+        &__old-price {
+          text-decoration: line-through;
+          grid-area: 1 / 1 / span 1 / span 1;
+          font-size: calc(.7rem + 0.5vw);
+          align-self: center;
+          text-align: left;
+        }
+
+        &__new-price {
+          color: $color-tertiary-red;
+          grid-area: 1 / 2 / span 1 / span 1;
+          font-size: calc(1rem + 0.5vw);
+          align-self: center;
+          text-align: left;
+        }
+
+        &__price {
+          grid-area: 1 / 1 / span 1 / span 1;
+          align-self: center;
           text-align: left;
           font-size: calc(1rem + 0.5vw);
         }
+
+        }
+
+        
+
+
       }
     }
   }
@@ -1109,6 +1391,7 @@ svg {
   height: auto;
   grid-template: auto auto / 1fr;
   row-gap: 50px;
+  background: $color-primary-grey;
 
 
   &__tooltip {
@@ -1156,7 +1439,7 @@ svg {
   &__table {
 
     display: grid;
-    grid-template: calc(5rem + .5vw) auto auto calc(10rem + .5vw) / 1fr 3fr 1fr 1fr;
+    grid-template: calc(5rem + .5vw) auto auto auto auto auto auto calc(10rem + .5vw) / 1fr 3fr 1fr 1fr;
     row-gap: 20px;
 
     &__legend {
@@ -1305,22 +1588,106 @@ svg {
           background: $color-hover-grey;
           grid-area: 1/2/span 1/span 3;
           align-self: end;
+
+          &__empty {
+            font-size: calc(1.5rem + .5vw);
+            height: calc(20rem + .5vw);
+            line-height: calc(20rem + .5vw);
+            padding-left: 15vw;
+          
+          }
           
         }
       }
   
     }
 
-    &__total {
+    &__code {
       grid-area: 3 / 2 / span 1 / span 3;
+      justify-self: end;
+      display: grid;
+      grid-auto-flow: column;
+      align-items: center;
+      height: calc(4rem + .5vw);
+      padding: calc(2rem + .5vw) 0;
+
+      h3 {
+        padding-right: 15px;
+        color: #626262;
+        font-weight: 400;
+      }
+
+      input {
+        height: 100%;
+        box-sizing: border-box;
+        padding-left: 5px;
+      }
+
+      button {
+        background: $color-secondary-black;
+        color: $color-primary-grey;
+        height: 100%;
+        padding: 0 15px;
+        border: 1px solid $color-secondary-black;
+        
+      }
+  }
+    
+  &__subtotal {
+    grid-area: 4 / 2 / span 1 / span 3;
+    display: grid;
+    height: calc(2rem + .5vw);
+    align-items: center;
+    grid-template: 1fr / 3fr 1fr 1fr;
+
+        &__value {
+      grid-area: 1 / 3 / span 1 / span 1;
+      justify-self: end;
+      font-weight: 400;
+    }
+
+    &__title {
+      font-weight: 400;
+    }
+  }
+
+  &__discount {
+    grid-area: 5 / 2 / span 1 / span 3;
+    display: grid;
+    height: calc(2rem + .5vw);
+    align-items: center;
+    grid-template: 1fr / 3fr 1fr 1fr;
+
+    &__value {
+      grid-area: 1 / 3 / span 1 / span 1;
+      justify-self: end;
+      color: $color-tertiary-red;
+      font-weight: 400;
+    }
+
+    &__title {
+      font-weight: 400;
+    }
+  }
+
+    &__total {
+      grid-area: 6 / 2 / span 1 / span 3;
       display: grid;
       height: calc(10rem + .5vw);
       align-items: center;
       grid-template: 1fr / 3fr 1fr 1fr;
+
+      &__value {
+        justify-self: end;
+      }
+
+      &__title {
+        font-weight: 600;
+      }
     }
 
     &__buttons {
-      grid-area: 4 / 2 / span 1 / span 3;
+      grid-area: 7 / 2 / span 1 / span 3;
       display: grid;
       grid-template: 1fr / 1fr 1fr;
       height: calc(6rem + 0.5vw);
@@ -1379,11 +1746,12 @@ display: grid;
 
 
 .product-item-container {
-  grid-area: 4/2 / span 1 / span 1;
+  grid-area: 3/2 / span 1 / span 1;
   display: grid;
   grid-template: 1fr / 1fr auto 5fr;
   height: 70vh;
   column-gap: 50px;
+  background: $color-primary-grey;
 
   &__back {
     grid-area: 1 / 1 / span 1 / span 1;
@@ -1422,8 +1790,19 @@ display: grid;
       display: grid;
       grid-template: auto auto / 1fr 1fr;
 
-      &__price {
+      &__price-container {
         text-align: right;
+        display: grid;
+        grid-auto-flow: row;
+
+        &__old-price {
+        text-decoration: line-through;
+        font-size: calc(1.3rem + .5vw);
+        }
+
+        &__new-price {
+          color: $color-tertiary-red;
+        }
       }
     }
 
@@ -1584,6 +1963,25 @@ display: grid;
     grid-area: 1 / 2 / span 1 / span 1;
     height: 70vh;
     z-index: -2;
+  }
+}
+
+  div.placeholder#placeholder {
+  animation-duration: 1.8s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: linear-gradient(to right, #fafafa 8%, #f4f4f4 38%, #fafafa 54%);
+  background-size: 1000px 640px;
+}
+
+@keyframes placeHolderShimmer{
+  0%{
+      background-position: -468px 0
+  }
+  100%{
+      background-position: 468px 0
   }
 }
 

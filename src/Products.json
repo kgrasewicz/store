@@ -1,6 +1,6 @@
 [
   {
-    "product_id": "5w7c4km",
+    "product_id": "zy5w7c4km",
     "product_name": "Silver bracelet FEZ",
     "price": "150",
     "stock": [
@@ -13,10 +13,9 @@
     "category": "bracelets",
     "collection_name": "Casablanca",
     "material": "silver",
-    "popularity": "0",
-    "discount_val": "0",
-    "tags": ["fez", "silver", "bracelet"],
-    "specs": "Delicate bracelet made of the 925 silver, available in four sizes."
+    "discount_val": "30",
+    "tags": ["fez", "silver", "bracelet", "Casablanca"],
+    "specs": "Delicate bracelet made of 925 silver, available in four sizes."
   },
   {
     "product_id": "u51kwr7rp",
@@ -28,10 +27,9 @@
     "category": "earrings",
     "collection_name": "Barcelona",
     "material": "silver",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["madrid", "silver", "earrings"],
-    "specs": "Earrings made of 925 silver measuring 2cm in diameter."
+    "tags": ["madrid", "silver", "earrings", "Barcelona"],
+    "specs": "Earrings made of 925 silver, measuring 2cm in diameter."
   },
   {
     "product_id": "i978dp985",
@@ -43,10 +41,9 @@
     "category": "earrings",
     "collection_name": "Barcelona",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Earrings made of 333 gold measuring 1cm in diameter."
+    "tags": ["valencia", "gold", "earrings", "Barcelona", "golden"],
+    "specs": "Earrings made of 333 gold, measuring 1cm in diameter."
   },
   {
     "product_id": "d1c11pxcl",
@@ -62,10 +59,9 @@
     "category": "bracelets",
     "collection_name": "Barcelona",
     "material": "silver",
-    "popularity": "0",
-    "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Elegant bracelet made of the 925 silver, available in four sizes."
+    "discount_val": "20",
+    "tags": ["seville", "silver", "bracelet", "Barcelona"],
+    "specs": "Elegant bracelet made of 925 silver, available in four sizes."
   },
   {
     "product_id": "95ubntxhj",
@@ -81,10 +77,9 @@
     "category": "bracelets",
     "collection_name": "Casablanca",
     "material": "silver",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Bracelet with rhinestones made of the 925 silver, available in four sizes."
+    "tags": ["tangier", "silver", "bracelet", "Casablanca", "rhinestones"],
+    "specs": "Bracelet with rhinestones made of 925 silver, available in four sizes."
   },
   {
     "product_id": "i2irt4jw6",
@@ -100,10 +95,10 @@
     "category": "bracelets",
     "collection_name": "Barcelona",
     "material": "silver",
-    "popularity": "0",
+    "coupons": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Bracelet made of the 925 silver, available in four sizes."
+    "tags": ["malaga", "silver", "bracelet", "Barcelona"],
+    "specs": "Bracelet made of 925 silver, available in four sizes."
   },
   {
     "product_id": "hqujklvqx",
@@ -115,10 +110,9 @@
     "category": "earrings",
     "collection_name": "Barcelona",
     "material": "gold",
-    "popularity": "0",
-    "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Earrings made of the 333 gold measuring 2cm in diameter."
+    "discount_val": "20",
+    "tags": ["zaragoza", "gold", "earrings", "Barcelona", "golden", "agate"],
+    "specs": "Earrings made of 333 gold, measuring 2cm in diameter."
   },
   {
     "product_id": "yil04m892",
@@ -130,25 +124,23 @@
     "category": "necklaces",
     "collection_name": "Casablanca",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Necklace made of the 333 gold measuring 30cm in length."
+    "tags": ["marrakesh", "gold", "necklace", "Casablanca", "golden"],
+    "specs": "Necklace made of the 333 gold, measuring 30cm in length."
   },
   {
     "product_id": "cjv6gwkv4",
     "product_name": "Golden earrings with pearls PALMA",
-    "price": "350",
+    "price": "450",
     "stock": [
       { "size": "1", "quantity": "200" }
     ],
     "category": "earrings",
     "collection_name": "Barcelona",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Earrings made of the 333 gold measuring 2 cm in diameter."
+    "tags": ["palma", "gold", "earrings", "Barcelona", "golden", "pearl"],
+    "specs": "Earrings made of 333 gold, measuring 2 cm in diameter."
   },
   {
     "product_id": "edpo43rvz",
@@ -160,41 +152,38 @@
     "category": "earrings",
     "collection_name": "Casablanca",
     "material": "gold",
-    "popularity": "0",
-    "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Earrings made of the 333 gold measuring 1.5 cm in diameter."
+    "discount_val": "10",
+    "tags": ["rabat", "gold", "earrings", "Casablanca", "golden"],
+    "specs": "Earrings made of 333 gold, measuring 1.5 cm in diameter."
   },
   {
     "product_id": "rsnxan6nt",
     "product_name": "Small golden earrings VIGO",
-    "price": "200",
+    "price": "250",
     "stock": [
       { "size": "1", "quantity": "200" }
     ],
     "category": "earrings",
     "collection_name": "Barcelona",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Earrings made of the 333 gold measuring 1 cm in diameter."
+    "tags": ["vigo", "gold", "earrings", "Barcelona", "golden"],
+    "specs": "Earrings made of 333 gold, measuring 1 cm in diameter."
     
   },
   {
     "product_id": "wohpyyn51",
     "product_name": "Golden earrings with pearls CARTAGENA",
-    "price": "300",
+    "price": "400",
     "stock": [
       { "size": "1", "quantity": "0" }
     ],
     "category": "earrings",
     "collection_name": "Barcelona",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Earrings made of the 333 gold measuring 1.5 cm in diameter."
+    "tags": ["cartagena", "gold", "earrings", "Barcelona", "golden", "pearl"],
+    "specs": "Earrings made of 333 gold, measuring 1.5 cm in diameter."
   },
   {
     "product_id": "gfnsbeoqa",
@@ -210,10 +199,9 @@
     "category": "bracelets",
     "collection_name": "Casablanca",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Bracelet made of the 333 gold, available in four sizes."
+    "tags": ["oujda", "gold", "bracelet", "Casablanca", "golden"],
+    "specs": "Bracelet made of 333 gold, available in four sizes."
   },
   {
     "product_id": "n2ezac3nr",
@@ -225,10 +213,9 @@
     "category": "earrings",
     "collection_name": "Barcelona",
     "material": "gold",
-    "popularity": "0",
-    "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Earrings made of the 333 gold measuring 1.5 cm in diameter."
+    "discount_val": "10",
+    "tags": ["cadiz", "gold", "earrings", "Barcelona", "golden"],
+    "specs": "Earrings made of 333 gold, measuring 1.5 cm in diameter."
   },
   {
     "product_id": "9hpresbsv",
@@ -240,10 +227,9 @@
     "category": "necklaces",
     "collection_name": "Casablanca",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Necklace made of the 333 gold measuring 30cm in length."
+    "tags": ["kenitra", "gold", "necklace", "Casablanca", "golden"],
+    "specs": "Necklace made of 333 gold, measuring 30cm in length."
   },
   {
     "product_id": "kquvslxzq",
@@ -255,10 +241,9 @@
     "category": "earrings",
     "collection_name": "Barcelona",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Earrings made of the 333 gold measuring 1.5 cm in diameter."
+    "tags": ["cordoba", "gold", "earrings", "Barcelona", "golden"],
+    "specs": "Earrings made of 333 gold, measuring 1.5 cm in diameter."
   },
   {
     "product_id": "jubceou5c",
@@ -270,10 +255,9 @@
     "category": "earrings",
     "collection_name": "Barcelona",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Earrings made of the 333 gold measuring 1 cm in diameter."
+    "tags": ["leon", "gold", "earrings", "Barcelona", "golden"],
+    "specs": "Earrings made of 333 gold, measuring 1 cm in diameter."
   },
   {
     "product_id": "hjo7erqlt",
@@ -285,10 +269,9 @@
     "category": "earrings",
     "collection_name": "Casablanca",
     "material": "silver",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Earrings made of the 925 silver measuring 2.5 cm in diameter."
+    "tags": ["agadir", "silver", "earrings", "Casablanca"],
+    "specs": "Earrings made of 925 silver, measuring 2.5 cm in diameter."
   },
   {
     "product_id": "oc69suf5h",
@@ -313,15 +296,14 @@
     "category": "rings",
     "collection_name": "Barcelona",
     "material": "silver",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Ring made of the 925 silver."
+    "tags": ["almeria", "silver", "ring", "Barcelona"],
+    "specs": "Ring made of 925 silver."
   },
   {
     "product_id": "a6dqvcfhe",
     "product_name": "Silver diamond ring SANTANDER",
-    "price": "200",
+    "price": "600",
     "stock": [
       { "size": "9", "quantity": "200" },
       { "size": "10", "quantity": "50" },
@@ -341,15 +323,14 @@
     "category": "rings",
     "collection_name": "Barcelona",
     "material": "silver",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Ring made of the 925 silver with 0.2 ct diamond."
+    "tags": ["santander", "silver", "ring", "Barcelona", "diamond"],
+    "specs": "Ring made of 925 silver with 0.2 ct diamond."
   },
   {
     "product_id": "ytfw7ep7u",
     "product_name": "Silver diamond ring TETOUAN",
-    "price": "150",
+    "price": "650",
     "stock": [
       { "size": "9", "quantity": "200" },
       { "size": "10", "quantity": "50" },
@@ -369,15 +350,14 @@
     "category": "rings",
     "collection_name": "Casablanca",
     "material": "silver",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Ring made of the 925 silver with 0.2 ct diamond."
+    "tags": ["tetouan", "silver", "ring", "Casablanca", "diamond"],
+    "specs": "Ring made of 925 silver with 0.2 ct diamond."
   },
   {
     "product_id": "xxyefff2z",
     "product_name": "Golden bracelet with rhinestones ALBACETE",
-    "price": "300",
+    "price": "350",
     "stock": [
       { "size": "14 cm", "quantity": "200" },
       { "size": "16 cm", "quantity": "10" },
@@ -388,10 +368,9 @@
     "category": "bracelets",
     "collection_name": "Barcelona",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Bracelet with rhinestones made of the 333 gold, available in four sizes."
+    "tags": ["albacete", "gold", "bracelet", "Barcelona", "golden", "rhinestones"],
+    "specs": "Bracelet with rhinestones made of 333 gold, available in four sizes."
   },
   {
     "product_id": "wimtxbt9p",
@@ -407,10 +386,9 @@
     "category": "bracelets",
     "collection_name": "Barcelona",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Bracelet made of the 333 gold, available in four sizes."
+    "tags": ["burgos", "gold", "bracelet", "Barcelona", "golden"],
+    "specs": "Bracelet made of 333 gold, available in four sizes."
   },
   {
     "product_id": "x5f4nkdvf",
@@ -435,10 +413,9 @@
     "category": "rings",
     "collection_name": "Casablanca",
     "material": "gold",
-    "popularity": "0",
-    "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Ring with lapis lazuli made of the 333 gold."
+    "discount_val": "50",
+    "tags": ["temara", "gold", "ring", "Casablanca", "golden", "lapis lazuli"],
+    "specs": "Ring with lapis lazuli made of 333 gold."
   },
   {
     "product_id": "ncnexottq",
@@ -463,15 +440,14 @@
     "category": "rings",
     "collection_name": "Barcelona",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Ring with malachite made of the 333 gold."
+    "tags": ["girona", "gold", "ring", "Barcelona", "golden", "malachite"],
+    "specs": "Ring with malachite made of 333 gold."
   },
   {
     "product_id": "491hkiw96",
     "product_name": "Silver diamond ring LUGO",
-    "price": "200",
+    "price": "700",
     "stock": [
       { "size": "9", "quantity": "200" },
       { "size": "10", "quantity": "50" },
@@ -491,15 +467,14 @@
     "category": "rings",
     "collection_name": "Barcelona",
     "material": "silver",
-    "popularity": "0",
-    "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Ring made of the 925 silver with 0.2 ct diamond."
+    "discount_val": "50",
+    "tags": ["lugo", "silver", "ring", "Barcelona", "diamond"],
+    "specs": "Ring made of 925 silver with 0.2 ct diamond."
   },
   {
     "product_id": "u4btogtz4",
     "product_name": "Golden ring with black diamonds SAFI",
-    "price": "300",
+    "price": "900",
     "stock": [
       { "size": "9", "quantity": "200" },
       { "size": "10", "quantity": "50" },
@@ -519,10 +494,9 @@
     "category": "rings",
     "collection_name": "Casablanca",
     "material": "gold",
-    "popularity": "0",
-    "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Ring made of the 333 gold with 0.2 ct black diamond."
+    "discount_val": "50",
+    "tags": ["safi", "gold", "ring", "Casablanca", "golden", "diamond", "black"],
+    "specs": "Ring made of 333 gold with 0.2 ct black diamond."
   },
   {
     "product_id": "444qalo6v",
@@ -538,10 +512,9 @@
     "category": "bracelets",
     "collection_name": "Casablanca",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Bracelet made of the 333 gold, available in four sizes."
+    "tags": ["mohammedia", "gold", "bracelet", "Casablanca", "golden"],
+    "specs": "Bracelet made of 333 gold, available in four sizes."
   },
   {
     "product_id": "snysnlbdt",
@@ -553,10 +526,9 @@
     "category": "necklaces",
     "collection_name": "Barcelona",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Pearl necklace made of the 333 gold."
+    "tags": ["manresa", "gold", "necklace", "Barcelona", "golden", "pearl"],
+    "specs": "Pearl necklace made of 333 gold."
   },
   {
     "product_id": "ipl3v5r48",
@@ -568,15 +540,14 @@
     "category": "necklaces",
     "collection_name": "Casablanca",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Pearl necklace made of the 333 gold."
+    "tags": ["khouribga", "gold", "necklace", "Casablanca", "golden", "pearl"],
+    "specs": "Pearl necklace made of 333 gold."
   },
   {
     "product_id": "thw6bomfe",
     "product_name": "Golden diamond ring BADAJOZ",
-    "price": "150",
+    "price": "650",
     "stock": [
       { "size": "9", "quantity": "200" },
       { "size": "10", "quantity": "50" },
@@ -596,15 +567,14 @@
     "category": "rings",
     "collection_name": "Barcelona",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Ring made of the 333 gold with 0.2 ct diamond."
+    "tags": ["badajoz", "gold", "ring", "Barcelona", "golden", "diamond"],
+    "specs": "Ring made of 333 gold with 0.2 ct diamond."
   },
   {
     "product_id": "ci3q4zkgv",
     "product_name": "Golden diamond ring TOLEDO",
-    "price": "150",
+    "price": "550",
     "stock": [
       { "size": "9", "quantity": "200" },
       { "size": "10", "quantity": "50" },
@@ -624,10 +594,9 @@
     "category": "rings",
     "collection_name": "Barcelona",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Ring made of the 333 gold with 0.2 ct diamond."
+    "tags": ["toledo", "gold", "ring", "Barcelona", "diamond", "golden"],
+    "specs": "Ring made of 333 gold with 0.2 ct diamond."
   },
   {
     "product_id": "vx2xxgtbu",
@@ -652,9 +621,8 @@
     "category": "rings",
     "collection_name": "Casablanca",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
+    "tags": ["jadida", "gold", "ring", "Casablanca", "quartz", "golden"],
     "specs": "Ring made of the 333 gold with quartz."
   },
   {
@@ -667,10 +635,9 @@
     "category": "necklaces",
     "collection_name": "Barcelona",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Necklace made of the 333 gold measuring 40 cm in length."
+    "tags": ["palencia", "gold", "necklace", "Barcelona", "golden"],
+    "specs": "Necklace made of 333 gold, measuring 40 cm in length."
   },
   {
     "product_id": "vmz5tc0ea",
@@ -695,10 +662,9 @@
     "category": "rings",
     "collection_name": "Barcelona",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Ring made of the 333 gold."
+    "tags": ["ourense", "gold", "ring", "Barcelona", "golden"],
+    "specs": "Ring made of 333 gold."
   },
   {
     "product_id": "of15awgwy",
@@ -710,10 +676,9 @@
     "category": "necklaces",
     "collection_name": "Casablanca",
     "material": "silver",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Necklace with rhinestones made of the 925 silver measuring 35 cm in length."
+    "tags": ["nador", "silver", "necklace", "Casablanca", "rhinestones"],
+    "specs": "Necklace with rhinestones made of 925 silver, measuring 35 cm in length."
   },
   {
     "product_id": "ss400ivhk",
@@ -725,10 +690,9 @@
     "category": "earrings",
     "collection_name": "Barcelona",
     "material": "silver",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Earrings with rhinestones made of the 925 silver measuring 3cm in diameter."
+    "tags": ["gandia", "silver", "earrings", "Barcelona", "rhinestones"],
+    "specs": "Earrings with rhinestones made of 925 silver, measuring 3cm in diameter."
   },
   {
     "product_id": "514h08kw0",
@@ -740,10 +704,9 @@
     "category": "earrings",
     "collection_name": "Barcelona",
     "material": "silver",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Earrings with rhinestones made of the 925 silver measuring 3cm in diameter."
+    "tags": ["ferrol", "silver", "earrings", "Barcelona", "rhinestones"],
+    "specs": "Earrings with rhinestones made of 925 silver, measuring 3cm in diameter."
   },
   {
     "product_id": "1j5xtcyah",
@@ -755,10 +718,9 @@
     "category": "earrings",
     "collection_name": "Barcelona",
     "material": "silver",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Earrings with rhinestones made of the 925 silver measuring 3cm in diameter."
+    "tags": ["salamanca", "silver", "earrings", "Barcelona", "rhinestones"],
+    "specs": "Earrings with rhinestones made of 925 silver, measuring 3cm in diameter."
   },
   {
     "product_id": "sdcsx4d1g",
@@ -783,9 +745,8 @@
     "category": "rings",
     "collection_name": "Casablanca",
     "material": "silver",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
+    "tags": ["taza", "silver", "ring", "Casablanca", "rhinestones"],
     "specs": "Eing made of the 925 silver."
   },
   {
@@ -811,15 +772,14 @@
     "category": "rings",
     "collection_name": "Barcelona",
     "material": "silver",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Ring with rhinestones made of the 925 silver."
+    "tags": ["huelva", "silver", "ring", "Barcelona", "rhinestones"],
+    "specs": "Ring with rhinestones made of 925 silver."
   },
   {
     "product_id": "87gyrppan",
     "product_name": "Golden ring with malachite BERRECHID",
-    "price": "300",
+    "price": "350",
     "stock": [
       { "size": "9", "quantity": "20" },
       { "size": "10", "quantity": "50" },
@@ -839,9 +799,8 @@
     "category": "rings",
     "collection_name": "Casablanca",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
+    "tags": ["berrechid", "gold", "ring", "Casablanca", "golden", "malachite"],
     "specs": "Ring with malachite made of the 333 gold."
   },
   {
@@ -854,10 +813,9 @@
     "category": "earrings",
     "collection_name": "Barcelona",
     "material": "silver",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Earrings with rhinestones made of the 925 silver measuring 3cm in diameter."
+    "tags": ["alzira", "silver", "earrings", "Barcelona", "rhinestones"],
+    "specs": "Earrings with rhinestones made of 925 silver, measuring 3cm in diameter."
   },
   {
     "product_id": "wmhhkbkz8",
@@ -873,10 +831,9 @@
     "category": "bracelets",
     "collection_name": "Casablanca",
     "material": "silver",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Bracelet made of the 925 silver, available in four sizes."
+    "tags": ["larache", "silver", "bracelet", "Casablanca", "red", "Swarovski", "crystal"],
+    "specs": "Bracelet made of 925 silver, available in four sizes."
   },
   {
     "product_id": "7hraouapp",
@@ -888,10 +845,9 @@
     "category": "necklaces",
     "collection_name": "Barcelona",
     "material": "silver",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Necklace with red Swarovski crystal, made of the 925 silver measuring 40cm in length"
+    "tags": ["marbella", "silver", "necklace", "Barcelona", "red", "Swarovski", "crystal"],
+    "specs": "Necklace with red Swarovski crystal, made of 925 silver measuring 40cm in length"
   },
   {
     "product_id": "1qrqq72ed",
@@ -916,10 +872,9 @@
     "category": "rings",
     "collection_name": "Barcelona",
     "material": "silver",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Ring with white Swarovski crystal, made of the 925 silver."
+    "tags": ["vitoria", "silver", "ring", "Barcelona", "white", "Swarovski", "crystal"],
+    "specs": "Ring with white Swarovski crystal, made of 925 silver."
   },
   {
     "product_id": "5svgq9z5h",
@@ -944,25 +899,23 @@
     "category": "rings",
     "collection_name": "Casablanca",
     "material": "silver",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Ring with rhinestones, made of the 925 silver."
+    "tags": ["guelmim", "silver", "ring", "Casablanca", "rhinestones"],
+    "specs": "Ring with rhinestones, made of 925 silver."
   },
   {
     "product_id": "863s4jekn",
     "product_name": "Golden pearl necklace LOGRONO",
-    "price": "250",
+    "price": "450",
     "stock": [
       { "size": "1", "quantity": "200" }
     ],
     "category": "necklaces",
     "collection_name": "Barcelona",
     "material": "gold",
-    "popularity": "0",
-    "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Pearl necklace made of the 333 gold."
+    "discount_val": "40",
+    "tags": ["logrono", "gold", "necklace", "Barcelona", "golden", "pearl"],
+    "specs": "Pearl necklace made of 333 gold."
   },
   {
     "product_id": "xrdabew7h",
@@ -974,10 +927,9 @@
     "category": "necklaces",
     "collection_name": "Casablanca",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Pearl necklace made of the 333 gold, measuring 35 cm in length."
+    "tags": ["berkane", "gold", "necklace", "Casablanca", "golden", "pearl"],
+    "specs": "Pearl necklace made of 333 gold, measuring 35 cm in length."
   },
   {
     "product_id": "n14784yz9",
@@ -1002,10 +954,9 @@
     "category": "rings",
     "collection_name": "Barcelona",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Ring made of the 333 gold."
+    "tags": ["blanes", "gold", "ring", "Barcelona", "golden"],
+    "specs": "Ring made of 333 gold."
   },
   {
     "product_id": "rd2dzk0qn",
@@ -1021,10 +972,9 @@
     "category": "bracelets",
     "collection_name": "Casablanca",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Bracelet made of the 333 gold, available in four sizes."
+    "tags": ["tiznit", "gold", "bracelet", "Casablanca", "golden"],
+    "specs": "Bracelet made of 333 gold, available in four sizes."
   },
   {
     "product_id": "yi3hxg5ia",
@@ -1040,10 +990,9 @@
     "category": "bracelets",
     "collection_name": "Casablanca",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Bracelet made of the 333 gold, available in four sizes."
+    "tags": ["martil", "gold", "bracelet", "Casablanca", "golden"],
+    "specs": "Bracelet made of 333 gold, available in four sizes."
   },
   {
     "product_id": "gw2ppbn1a",
@@ -1059,10 +1008,9 @@
     "category": "bracelets",
     "collection_name": "Barcelona",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Bracelet made of the 333 gold, available in four sizes."
+    "tags": ["valladolid", "gold", "bracelet", "Barcelona", "golden"],
+    "specs": "Bracelet made of 333 gold, available in four sizes."
   },
   {
     "product_id": "6vdly4541",
@@ -1072,10 +1020,9 @@
     "category": "rings",
     "collection_name": "Barcelona",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Earrings made of the 333 gold, measuring 3 cm in diameter."
+    "tags": ["sebastian", "gold", "earrings", "Barcelona", "golden"],
+    "specs": "Earrings made of 333 gold, measuring 3 cm in diameter."
   },
   {
     "product_id": "txq4gpl5w",
@@ -1100,10 +1047,9 @@
     "category": "rings",
     "collection_name": "Casablanca",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Ring made of the 333 gold."
+    "tags": ["midelt", "gold", "ring", "Casablanca", "golden"],
+    "specs": "Ring made of 333 gold."
   },
   {
     "product_id": "oudteubgq",
@@ -1128,10 +1074,9 @@
     "category": "rings",
     "collection_name": "Barcelona",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Ring made of the 333 gold."
+    "tags": ["las palmas", "gold", "ring", "Barcelona", "golden"],
+    "specs": "Ring made of 333 gold."
   },
   {
     "product_id": "e8d3jd5xe",
@@ -1143,10 +1088,9 @@
     "category": "necklaces",
     "collection_name": "Casablanca",
     "material": "gold",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Necklace with black stone made of the 333 gold, measuring 30 cm in length."
+    "tags": ["azrou", "gold", "necklace", "Casablanca", "golden", "black", "stone"],
+    "specs": "Necklace with black stone made of 333 gold, measuring 30 cm in length."
   },
   {
     "product_id": "bdig3lvpp",
@@ -1162,9 +1106,8 @@
     "category": "bracelets",
     "collection_name": "Barcelona",
     "material": "silver",
-    "popularity": "0",
     "discount_val": "0",
-    "tags": ["0"],
-    "specs": "Bracelet made of the 925 silve, available in four sizes."
+    "tags": ["granada", "silver", "bracelet", "Barcelona"],
+    "specs": "Bracelet made of 925 silver, available in four sizes."
   }
 ]
