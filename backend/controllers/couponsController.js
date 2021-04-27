@@ -8,8 +8,8 @@ export const getCoupons = asyncHandler(async(req, res) => {
 })
 
 //getUserById function to retrieve user by id
-export const getCouponByName  = asyncHandler(async(req, res) => {
-    const coupon = await Coupon.findByName(req.params.promocode)
+export const getCouponsByName  = asyncHandler(async(req, res) => {
+    const coupon = await Coupon.find({promocode: req.params.promocode})
 
     //if user id match param id send user else throw error
     if(coupon){

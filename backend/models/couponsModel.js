@@ -7,6 +7,12 @@ const couponsSchema = new mongoose.Schema({
     },
     products:{
         type: Array,
+    },
+    discount_percent: {
+        type: Number
+    },
+    discount_abs: {
+        type: Number
     }
 }, {
     timestamps: true

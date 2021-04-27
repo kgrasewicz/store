@@ -1,5 +1,6 @@
 import React from "react";
 import Aux from "react-aux";
+import {NavLink} from "react-router-dom";
 
 let collectionTitle = { Casablanca: "Casablanca", Marocco: "Marocco" };
 
@@ -12,7 +13,7 @@ const collectionDesc = (props) => {
     <Aux>
       <h2 className={collectionTitle[props.collection]}>{collectionContent[props.collection]}</h2>
       <div className={collectionTitle[props.collection]}><h1 className={collectionTitle[props.collection]}>{collectionTitle[props.collection]}</h1></div>
-      <a href={collectionLink[props.collection]} className={"link link-1 " + collectionTitle[props.collection]}>Check collection &nbsp; 🡢</a>
+      <NavLink to="/shop/search" className={"link link-1 " + collectionTitle[props.collection]}>Check collection &nbsp; 🡢</NavLink>
       
     </Aux>
   );

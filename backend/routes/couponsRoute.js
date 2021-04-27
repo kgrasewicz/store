@@ -1,4 +1,4 @@
-import { getCoupons, getCouponsByName} from "../controllers/productController.js";
+import { getCoupons, getCouponsByName} from "../controllers/couponsController.js";
 import express from 'express'
 const router = express.Router()
 

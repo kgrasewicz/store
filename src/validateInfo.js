@@ -12,6 +12,25 @@ export default function validateInfo(values) {
 
     }
 
+    if (!values.password) {
+        errors.password = "Password required"
+
+
+    } 
+
+
+    if (!values.name) {
+        errors.name = "Name required"
+
+
+    }
+
+    if (!values.surname) {
+        errors.surname = "Surname required"
+
+
+    }
+
 
     return errors;
 }

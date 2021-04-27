@@ -152,7 +152,10 @@ class ProductItem extends Component {
       this.addToCart();
     }
     
-
+    sessionStorage.setItem(
+      "chosenSize",
+      "One Size"
+    );
     $(".pop-cart-continue").toggleClass("active");
   };
 

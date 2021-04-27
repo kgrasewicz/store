@@ -35,6 +35,10 @@ let itemSchema = new mongoose.Schema({
     total: {
         type: Number,
         required: true,
+    },
+    discount: {
+        type: Number,
+        required: false
     }
 }, {
     timestamps: true
@@ -50,6 +54,10 @@ const cartSchema = new mongoose.Schema({
         default: 0,
         type: Number
     },
+    discountTotal: {
+        default: 0,
+        type: Number
+    }
 }, {
     timestamps: true,
 }, { collection : 'cart' })

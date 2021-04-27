@@ -4,6 +4,8 @@ import { NavLink } from "react-router-dom";
 import FetchProductImg from "../../Components/Shop/FetchProductImg";
 import $ from "jquery";
 import Promocode from "../../Components/Shop/Promocode";
+import { values } from "lodash";
+import session from "express-session";
 
 class Cart extends Component {
   _isMounted = false;
@@ -12,6 +14,7 @@ class Cart extends Component {
     super(props);
     this.state = {
       cart: [],
+      discount: null,
     };
 
     this.props = props;
@@ -20,6 +23,8 @@ class Cart extends Component {
   componentDidMount = () => {
     this._isMounted = true;
     this.fetchData();
+    this.handlePromocode("")
+    
 
   };
 
@@ -46,7 +51,7 @@ class Cart extends Component {
             cart: response.data,
           });
 
-          $('.items-counter').text(response.data.itemsTotal)
+          $(".items-counter").text(response.data.itemsTotal);
 
           console.log(response);
         }
@@ -54,8 +59,6 @@ class Cart extends Component {
       .catch((error) => {
         console.log(error);
       });
-
-      
   };
 
   emptyCart = () => {
@@ -104,13 +107,69 @@ class Cart extends Component {
   };
 
   handleQuantityChange = (productId, size, quantity, currentQuantity) => {
-    
-    
-    const alteredQuantity = (currentQuantity === 1 && quantity === -1) ? 0 : quantity
+    const alteredQuantity =
+      currentQuantity === 1 && quantity === -1 ? 0 : quantity;
 
-    this.alterItemQuantity(productId, size, alteredQuantity)
+    this.alterItemQuantity(productId, size, alteredQuantity);
+  };
 
-  }
+  handlePromocode = (errorDisplay) => {
+
+    if (!sessionStorage.code && document.querySelector(".cart-container__table__code input") && errorDisplay === "active") {
+      sessionStorage.setItem("code", document.querySelector(".cart-container__table__code input").value)
+      
+
+    }
+
+    if (sessionStorage.code) {
+      document.querySelector(".cart-container__table__code input").disabled = true;
+      document.querySelector(".cart-container__table__code input").value = sessionStorage.code
+      $(".cart-container__table__code").addClass("active")
+    }
+
+    
+    let code = sessionStorage.code
+    
+
+    axios
+      .get("/api/coupons/" + code)
+      .then((response) => {
+        console.log(this.state.cart.items.length)
+        for (var i = 0; i < this.state.cart.items.length; i++) {
+          if (
+            response.data[0].products == "*" ||
+            response.data[0].products.findIndex(
+              (x) => (x = this.state.cart.items[i].model)
+            ) > -1
+          ) {
+
+            this._isMounted = true;
+            axios
+              .post("/api/cart", {
+                productId: this.state.cart.items[i].productId,
+                size: this.state.cart.items[i].size,
+                quantity: -2,
+                discount: response.data[0].discount_percent == null ? response.data[0].discount_abs : response.data[0].discount_percent*this.state.cart.items[i].price/100
+              })
+              .then(
+                (response) => {
+                  console.log(response);
+                  this.fetchData();
+                },
+                (error) => {
+                  console.log(error);
+                }
+              );
+          }
+        }
+
+        $(".cart-container__table__code").addClass(errorDisplay)
+        
+      })
+      .catch((error) => {
+        $(".cart-container__table__code__error").addClass(errorDisplay)
+      });
+  };
 
   render() {
     const CartMapping = () => {
@@ -135,9 +194,35 @@ class Cart extends Component {
               </div>
             </NavLink>
             <div className="cart__quantityHandler">
-              <button className="cart__quantityHandler__add" onClick={() =>this.handleQuantityChange(item.productId, item.size, 1, item.quantity)}><h4>+</h4></button>
-            <h2 type="text" className="cart__qty">{item.quantity}</h2>
-            <button className="cart__quantityHandler__deduct" onClick={() =>this.handleQuantityChange(item.productId, item.size, -1, item.quantity)}><h4>-</h4></button>
+              <button
+                className="cart__quantityHandler__add"
+                onClick={() =>
+                  this.handleQuantityChange(
+                    item.productId,
+                    item.size,
+                    1,
+                    item.quantity
+                  )
+                }
+              >
+                <h4>+</h4>
+              </button>
+              <h2 type="text" className="cart__qty">
+                {item.quantity}
+              </h2>
+              <button
+                className="cart__quantityHandler__deduct"
+                onClick={() =>
+                  this.handleQuantityChange(
+                    item.productId,
+                    item.size,
+                    -1,
+                    item.quantity
+                  )
+                }
+              >
+                <h4>-</h4>
+              </button>
             </div>
             <h4 className="cart__total">{item.price} PLN</h4>
             <button
@@ -152,7 +237,11 @@ class Cart extends Component {
           </li>
         ));
       } else {
-        cart = <li className="cart-container__table__products__item__line__empty">The cart is empty</li>
+        cart = (
+          <li className="cart-container__table__products__item__line__empty">
+            The cart is empty
+          </li>
+        );
       }
 
       return cart;
@@ -276,39 +365,49 @@ class Cart extends Component {
             </li>
           </ul>
           <ul className="cart-container__table__products">{<CartMapping />}</ul>
-          <Promocode />
-          <div className="cart-container__table__subtotal">
-            <h3 className="cart-container__table__subtotal__title">Subtotal:</h3>
 
-            <h4 className="cart-container__table__subtotal__value">
-              {this.state.cart.subTotal || 0} PLN
-            </h4>
-          </div>
+          <div className="cart-container__table__summary">
+            <h4 className="cart-container__table__summary__title">Summary</h4>
 
-          <div className="cart-container__table__discount">
-            <h3 className="cart-container__table__discount__title">Discount:</h3>
+            <div className="cart-container__table__subtotal">
+              <h3 className="cart-container__table__subtotal__title">
+                Subtotal
+              </h3>
 
-            <h4 className="cart-container__table__discount__value">
-              {this.state.cart.subTotal || 0} PLN
-            </h4>
-          </div>
+              <h3 className="cart-container__table__subtotal__value">
+                {this.state.cart.subTotal || 0} PLN
+              </h3>
+            </div>
 
-          <div className="cart-container__table__total">
-            <h2 className="cart-container__table__total__title">Total:</h2>
-            <h2 className="cart-container__table__total__items">
-              {this.state.cart.itemsTotal || 0} items
-            </h2>
-            <h1 className="cart-container__table__total__value">
-              {this.state.cart.subTotal || 0} PLN
-            </h1>
-          </div>
-          <div className="cart-container__table__buttons">
-            <button className="cart-container__table__buttons__continue-shopping">
-              <NavLink to="/shop/all">Continue shopping</NavLink>
-            </button>
-            <button className="cart-container__table__buttons__checkout">
-              Proceed to checkout
-            </button>
+            <div className={"cart-container__table__discount " + ((this.state.cart.discountTotal === 0 || !this.state.cart) ? "empty" : "")}>
+              <h3 className="cart-container__table__discount__title">
+                Discount
+              </h3>
+              <h3 className="cart-container__table__discount__value ">
+              {!this.state.cart ? 0 : this.state.cart.discountTotal} PLN
+              </h3>
+              
+            </div>
+            <Promocode codeHandler={() => this.handlePromocode("active")} />
+            <div className="cart-container__table__total">
+              <h2 className="cart-container__table__total__title">Total</h2>
+              <h2 className="cart-container__table__total__items">
+                {this.state.cart.itemsTotal || 0}{" "}
+                {this.state.cart.itemsTotal == 1 ? "item" : "items"}
+              </h2>
+              <h4 className="cart-container__table__total__value">
+                {this.state.cart.subTotal + this.state.cart.discountTotal || 0} PLN
+              </h4>
+            </div>
+            <div className="cart-container__table__buttons">
+              <button className="cart-container__table__buttons__continue-shopping">
+                <NavLink to="/shop/all">Continue shopping</NavLink>
+              </button>
+              <NavLink to ="/shop/cart/login">
+              <button className="cart-container__table__buttons__checkout">
+                Proceed to checkout 
+              </button></NavLink>
+            </div>
           </div>
         </div>
       </div>
