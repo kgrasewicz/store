@@ -25,6 +25,8 @@ function PriceSlider (props) {
               setValue(value);
             }}
             onClick={props.clickHandler}
+            onDrop={props.clickHandler}
+            onMouseUp={props.clickHandler}
           />
         </div>
         <div className="price-slider__inputs">

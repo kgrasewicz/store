@@ -155,6 +155,10 @@ class Cart extends Component {
                 (response) => {
                   console.log(response);
                   this.fetchData();
+
+                  
+                    $(".cart-container__table__code").addClass(errorDisplay)
+                  
                 },
                 (error) => {
                   console.log(error);
@@ -162,12 +166,18 @@ class Cart extends Component {
               );
           }
         }
-
-        $(".cart-container__table__code").addClass(errorDisplay)
         
+        
+        
+        
+        $(".cart-container__table__code__error").removeClass(errorDisplay)
+
       })
       .catch((error) => {
         $(".cart-container__table__code__error").addClass(errorDisplay)
+        sessionStorage.removeItem("code")
+        document.querySelector(".cart-container__table__code input").disabled = false;
+        $(".cart-container__table__code").removeClass(errorDisplay)
       });
   };
 

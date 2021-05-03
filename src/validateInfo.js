@@ -16,19 +16,36 @@ export default function validateInfo(values) {
         errors.password = "Password required"
 
 
-    } 
-
-
-    if (!values.name) {
-        errors.name = "Name required"
-
-
+    } else if  (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/.test(values.password)){
+        errors.password = "Password must be at minimum 8 characters long and contain at least one lowercase character, one uppercase character, one numeric character and one special character"
     }
 
-    if (!values.surname) {
-        errors.surname = "Surname required"
+    if (!values.password2) {
+        errors.password = "Password required"
 
 
+    } else if  (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/.test(values.password)){
+        errors.password2 = "Password must be at minimum 8 characters long and contain at least one lowercase character, one uppercase character, one numeric character and one special character"
+    }
+
+    if (values.password !== values.password2) {
+        errors.password2 = "Passwords do not match"
+    }
+
+    if (!values.fname) {
+        errors.fname = "First name required"
+
+
+    } else if (!/\p{L}/.test(values.fname)) {
+        errors.fname = "Invalid first name"
+    }
+
+    if (!values.lname) {
+        errors.lname = "Last name required"
+
+
+    } else if (!/\p{L}/.test(values.lname)) {
+        errors.lname = "Invalid last name"
     }
 
 

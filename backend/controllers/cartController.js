@@ -1,20 +1,16 @@
 import Cart from "../models/cartModel.js";
 import asyncHandler from "express-async-handler";
 
+
 export const addItemToCart = asyncHandler(async (req, res) => {
   try {
     const cart = req.session.cart;
-    console.log(req.session.cart);
-    const cartDB = await Cart.find({});
 
-    console.log(req.body.discount);
     const productId = req.body.productId;
     const quantity = Number.parseInt(req.body.quantity);
-    console.log(req.body.productId);
     const size = req.body.size;
 
     if (req.session.cart) {
-      console.log(quantity);
       const indexFoundId = cart.items.findIndex(
         (item) => item.productId === productId
       );
@@ -22,9 +18,6 @@ export const addItemToCart = asyncHandler(async (req, res) => {
         (item) => item.productId === productId && item.size === size
       );
 
-      console.log(indexFoundId);
-      console.log(indexFoundSize);
-      console.log(quantity);
       if (indexFoundId !== -1 && indexFoundSize !== -1 && quantity === 0) {
         cart.items.splice(indexFoundId, 1);
         if (cart.items.length === 0) {
@@ -58,8 +51,7 @@ export const addItemToCart = asyncHandler(async (req, res) => {
         quantity !== 0 &&
         quantity !== -2
       ) {
-        console.log(quantity);
-        console.log("adsf");
+
         cart.items[indexFoundSize].discount =
           cart.items[indexFoundSize].discount;
         cart.items[indexFoundSize].quantity =
@@ -103,14 +95,12 @@ export const addItemToCart = asyncHandler(async (req, res) => {
       }
 
       let data = req.session.cart;
-
       res.status(200).json({
         type: "success",
         mgs: "Process Successful",
         data: data,
       });
     } else {
-      console.log(req.body.productId);
       const cartData = {
         items: [
           {
@@ -130,11 +120,9 @@ export const addItemToCart = asyncHandler(async (req, res) => {
         cartId: req.sessionID,
         discountTotal: 0,
       };
-      const newCart = new Cart(cartData);
 
-      let data = await newCart.save();
-      req.session.cart = newCart;
-      res.json(data);
+      req.session.cart = cartData;
+      res.json(req.session.cart);
     }
   } catch (err) {
     console.log(err);
@@ -147,10 +135,60 @@ export const addItemToCart = asyncHandler(async (req, res) => {
 });
 
 export const getCart = asyncHandler(async (req, res) => {
-  // const cart = await Cart.find({})
-  // res.json(cart)
 
   const cart = req.session.cart;
+
+  res.json(cart);
+});
+
+export const postCartDB =  asyncHandler(async (req, res) => {
+  const newCart = new Cart(req.session.cart);
+
+  let data = await newCart.save();
+
+  req.session.destroy()
+  res.json(data);
+});
+
+
+export const postPersonalData = asyncHandler(async (req, res) => {
+  const cart = req.session.cart
+
+  cart.personalData = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    phone: req.body.phone,
+    country: req.body.country,
+    postalCode: req.body.postalCode,
+    city: req.body.city,
+    addressLine1: req.body.addressLine1,
+    addressLine2: req.body.addressLine2,
+  };
+
+  res.json(cart);
+});
+
+export const postShippingData = asyncHandler(async (req, res) => {
+  const cart = req.session.cart
+
+  cart.shippingDetails = {
+    method: req.body.method,
+    address: req.body.address,
+    price: req.body.price,
+  };
+
+  res.json(cart);
+});
+
+
+export const postPaymentData = asyncHandler(async (req, res) => {
+  const cart = req.session.cart
+
+  cart.paymentDetails = {
+    method: req.body.method
+  };
+
   res.json(cart);
 });
 

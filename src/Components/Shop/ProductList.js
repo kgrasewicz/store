@@ -196,6 +196,8 @@ class ProductList extends Component {
     );
   };
 
+
+
   fetchData = (category) => {
     axios
       .get("/api/products")
@@ -345,6 +347,42 @@ class ProductList extends Component {
   };
 
   render() {
+
+    $(document).on('click', (event) => {
+
+      
+      if ($(event.target).closest('.products-container__tooltip__sort-container').length == 0) {
+
+        $(".products-container__tooltip__sort-container .arrow").removeClass(
+          "active"
+        );
+        $(".products-container__tooltip__sort-container__list").removeClass(
+          "active"
+        );
+      } else {
+        $(".products-container__tooltip__sort-container .arrow").toggleClass(
+          "active"
+        );
+        $(".products-container__tooltip__sort-container__list").toggleClass(
+          "active"
+        );
+      }
+      
+
+      if ($(event.target).closest('.products-container__tooltip__filter-container').length == 0) {
+
+        $(".products-container__tooltip__filter-container__dashboard").removeClass(
+          "active"
+        );
+        $(".products-container__tooltip__filter-container__top .arrow").removeClass(
+          "active"
+        );
+      }
+      
+
+      
+    })
+
     $(".search-container__arrow").on("click", () => this.props.history.push('/shop/search&' + $('.search-container__input').val().split(" ").join("&")));
     console.log(this.props.match.params.category)
     $(".search-container__input").keyup((event) => {

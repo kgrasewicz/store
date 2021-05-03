@@ -234,15 +234,6 @@ class ProductItem extends Component {
           >
             <h2>🡠 &nbsp; back to {this.state.product.category}</h2>
           </button>
-          <div className="product-item-container__toggle-product">
-            <button className="previous">
-              <h2>previous</h2>
-            </button>
-            <h2> / </h2>
-            <button className="next">
-              <h2>next</h2>
-            </button>
-          </div>
           <FetchProductImg
             className={this.state.product.product_id}
             link={this.state.product.product_id}

@@ -5,8 +5,8 @@ const useForm = validate => {
     const [values, setValues]= useState({
         email: '',
         phone: '',
-        name: '',
-        surname: '',
+        fname: '',
+        lname: '',
         password: ''
 
     })
