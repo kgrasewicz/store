@@ -34,6 +34,9 @@ const productSchema = new mongoose.Schema({
     },
     specs: {
         type: String
+    },
+    price_new: {
+        type: String
     }
 }, {
     timestamps: true

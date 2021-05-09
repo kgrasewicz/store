@@ -7,29 +7,28 @@ import { NavLink } from "react-router-dom";
 import inpost from "./inpost.png";
 import dhl from "./dhl.png";
 import poczta from "./poczta.png";
-import dotpay from "./dotpay.png";
-import blik from "./blik.png";
-import credit from "./credit.png";
+import { useHistory } from "react-router-dom";
 
 let section = { login: "Sign in", register: "Sign up" };
 
-const inputForm = (props) => {
+const InputForm = (props) => {
   const { handleChange, values, errors, handleSubmit } = UseForm(validate);
+  let history = useHistory();
 
   const type = props.type;
   const name = props.name;
 
   let isChecked;
 
-  function buttonClickHandler() {
+  function buttonClickHandler(e) {
     handleSubmit();
 
     console.log(errors[name] === "");
 
-    // if (errors[name] === "" || $(`input[name=${name}]`).val() !== "") {
     props.handler();
 
-    // }
+    console.log(e);
+    console.log(props.status);
   }
 
   if (props.section === "login") {
@@ -63,14 +62,18 @@ const inputForm = (props) => {
             <p className="error__p">{errors["password"]}</p>
           </label>
         </div>
-        <NavLink to={props.status}>
-          <button
-            className="cart-login__form-container__submit"
-            onClick={buttonClickHandler}
-          >
+        <NavLink
+          className="nav-login"
+          onClick={(e) => buttonClickHandler(e)}
+          to="#"
+        >
+          <button className="cart-login__form-container__submit">
             {section[props.section]}
           </button>
         </NavLink>
+        <h3 className="cart-login__form-container__title-2">
+            Don't have an account?
+          </h3>
       </Aux>
     );
   } else if (props.section === "register") {
@@ -148,6 +151,8 @@ const inputForm = (props) => {
         </button>
       </Aux>
     );
+  } else if (props.section === "register-confirmation") {
+    return (<h3>You have beeen successfully registered.</h3>)
   } else if (props.section === "checkout/1") {
     return (
       <Aux>
@@ -491,8 +496,22 @@ const inputForm = (props) => {
       </Aux>
     );
   } else {
-    return null;
+    return (
+      <Aux>
+        <input
+          type={type}
+          name={name}
+          placeholder={props.placeholder}
+          value={values.name}
+          onChange={handleChange}
+        />
+        <button className={props.class} onClick={buttonClickHandler}>
+          {props.children}
+        </button>
+        <p>{errors[name]}</p>
+      </Aux>
+    );
   }
 };
 
-export default inputForm;
+export default InputForm;

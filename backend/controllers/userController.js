@@ -4,6 +4,7 @@ import asyncHandler from "express-async-handler";
 
 
 export const getUser = asyncHandler(async(req, res) => {
+
     res.send(req.user)
 })
 
@@ -14,10 +15,10 @@ export const signUp = asyncHandler(async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   console.log(hashedPassword)
   if (user.length != 0) {
-    console.log("exosts")
+
     res.json("User already exists")
   } else {
-    console.log("exosdsdts")
+
     const userData = 
         {
           password: hashedPassword,

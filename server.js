@@ -15,7 +15,6 @@ import { createRequire } from 'module';
 
 
 
-
 const require = createRequire(import.meta.url);
 
 if (process.env.NODE_ENV !== 'production') {
@@ -34,11 +33,11 @@ dotenv.config();
 const app = express();
 
 //Creating API for user
+
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(passport.initialize())
-app.use(passport.session())
+
 
 
 app.use(
@@ -50,6 +49,14 @@ app.use(
     cookie: {maxAge: 180*60*1000}
   })
 );
+
+
+app.use(passport.initialize())
+app.use(passport.session())
+// app.post('/login', passport.authenticate('local', {
+//   successRedirect: "/",
+//   failureRedirect: '/shop/cart'
+// }))
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/coupons", couponsRoutes);
@@ -57,13 +64,6 @@ app.use("/api/users", userRoutes);
 app.use(function (req, res, next){
     res.locals.session = req.session
 });
-
-
-// app.post('/login', passport.authenticate('local', {
-//   successRedirect: "/",
-//   failureRedirect: '/shop/cart'
-// }))
-
 
 const PORT = process.env.PORT || 5002;
 

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import $ from "jquery";
 import InputForm from "./InputForm";
+import { useHistory } from "react-router-dom";
 
 class CartLogin extends Component {
   _isMounted = false;
@@ -9,7 +10,6 @@ class CartLogin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loginStatus: "#",
       inputSection: "login",
     };
 
@@ -20,33 +20,36 @@ class CartLogin extends Component {
     this._isMounted = false;
   }
 
-  handleRequest = () => {
+  handleRequest = (e) => {
     if (this.state.inputSection == "login") {
-      this.sendLoginRequest()
+      this.sendLoginRequest();
     } else {
-      this.sendRegisterRequest()
+      this.sendRegisterRequest();
     }
-  }
-  sendLoginRequest = (e) => {
+  };
 
+  sendLoginRequest = (e) => {
     this._isMounted = true;
 
     axios
       .post("/api/users/login", {
         email: $(".cart-login__form-container__email input").val(),
         password: $(".cart-login__form-container__password input").val(),
+        withCredentials: true,
       })
       .then((response) => {
         console.log(response);
 
         if (response.data == "Valid") {
-          this.setState({ loginStatus: "/shop/cart/checkout/1" });
+          
+          window.location.pathname = "/shop/cart/checkout/1";
         }
       })
       .catch((error) => {
         console.log(error);
       });
   };
+
 
   sendRegisterRequest = (e) => {
     this._isMounted = true;
@@ -56,20 +59,23 @@ class CartLogin extends Component {
         email: $(".cart-login__form-container__email input").val(),
         password: $(".cart-login__form-container__password input").val(),
         name: $(".cart-login__form-container__name input").val(),
-        surname: $(".cart-login__form-container__surname input").val()
+        surname: $(".cart-login__form-container__surname input").val(),
+        withCredentials: true,
       })
-      .then((response) => {})
+      .then((response) => {
+        console.log(response.data);
+        this.setState({inputSection: "register-confirmation"})
+      })
       .catch((error) => {
         console.log(error);
       });
   };
 
   sendGetRequest = () => {
-
     this._isMounted = true;
     console.log($(".cart-login__form-container__email input").val());
     axios
-      .get("/api/users/getUser")
+      .get("/api/users/getUser", { withCredentials: true })
       .then((response) => {
         console.log(response);
       })
@@ -90,20 +96,18 @@ class CartLogin extends Component {
       <div className="cart-login">
         <div className="cart-login__form-container">
           <InputForm
-            status={this.state.loginStatus}
             handler={this.handleRequest}
             section={this.state.inputSection}
           >
             Sign in
           </InputForm>
-          <h3 className="cart-login__form-container__title-2">
-            Don't have an account?
-          </h3>
+          
           <div className="cart-login__form-container__buttons">
             <button
               onClick={(e) => {
-                this.inputSectionHandler(this.state.inputSection == "login" ? "register" : "login");
-                
+                this.inputSectionHandler(
+                  this.state.inputSection == "login" ? "register" : "login"
+                );
               }}
               className="cart-login__form-container__buttons__toggle"
             >

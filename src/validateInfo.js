@@ -36,7 +36,7 @@ export default function validateInfo(values) {
         errors.fname = "First name required"
 
 
-    } else if (!/\p{L}/.test(values.fname)) {
+    } else if (!/^[\s\p{L}]+$/u.test(values.fname)) {
         errors.fname = "Invalid first name"
     }
 
@@ -44,7 +44,7 @@ export default function validateInfo(values) {
         errors.lname = "Last name required"
 
 
-    } else if (!/\p{L}/.test(values.lname)) {
+    } else if (!/^[\s\p{L}]+$/u.test(values.lname)) {
         errors.lname = "Invalid last name"
     }
 

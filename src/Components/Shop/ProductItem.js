@@ -115,7 +115,7 @@ class ProductItem extends Component {
           this.state.stock.length === 1
             ? "One size"
             : sessionStorage.getItem("chosenSize"),
-        price: this.state.product.price - this.state.product.discount_val,
+        price: this.state.product.price_new,
         quantity: 1,
       })
       .then(
@@ -245,7 +245,7 @@ class ProductItem extends Component {
               <h4 className={(this.state.product.discount_val > 0) ? "product-item-container__info__main__price-container__old-price" : "product-item-container__info__main__price-container__price"}>
                 {this.state.product.price} PLN
               </h4>
-              <h4 className="product-item-container__info__main__price-container__new-price">{this.state.product.discount_val > 0 ? this.state.product.price - this.state.product.discount_val + " PLN" : ""}</h4>
+              <h4 className="product-item-container__info__main__price-container__new-price">{this.state.product.discount_val > 0 ? this.state.product.price_new + " PLN" : ""}</h4>
               </div>
               <h3>Model: {this.state.product.product_id}</h3>
             </div>

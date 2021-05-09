@@ -7,6 +7,7 @@ const topMenu = () => {
     const switchMenuHandler = () => {
 
         $('.top-menu').toggleClass('active inactive');
+        $('body').toggleClass('active')
     }
 
     $('body').on('click', (e) => {
@@ -14,6 +15,7 @@ const topMenu = () => {
 
       if (!$('.top-menu').has(e.target).length > 0) {
         $('.top-menu').removeClass('active').addClass('inactive');
+        $('body').removeClass('active')
       }
     })
 

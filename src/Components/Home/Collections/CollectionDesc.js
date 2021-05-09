@@ -8,12 +8,17 @@ let collectionContent = { Casablanca: "From classic diamond jewelry to bold gems
 
 let collectionLink = { Casablanca: "/shop/casablanca", Marocco: "/shop/marocco" };
 
+function goToCollection () {
+  sessionStorage.setItem("collection","Casablanca")
+}
+
+
 const collectionDesc = (props) => {
   return (
     <Aux>
       <h2 className={collectionTitle[props.collection]}>{collectionContent[props.collection]}</h2>
       <div className={collectionTitle[props.collection]}><h1 className={collectionTitle[props.collection]}>{collectionTitle[props.collection]}</h1></div>
-      <NavLink to="/shop/search" className={"link link-1 " + collectionTitle[props.collection]}>Check collection &nbsp; 🡢</NavLink>
+      <NavLink to="/shop/all" onClick={goToCollection} className={"link link-1 " + collectionTitle[props.collection]}>Check collection &nbsp; 🡢</NavLink>
       
     </Aux>
   );

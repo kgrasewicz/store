@@ -27,6 +27,7 @@ class ProductList extends Component {
       filters: [],
       totalProducts: null,
       searchQuery: [""],
+      clearState: "",
     };
 
     this.props = props;
@@ -36,6 +37,15 @@ class ProductList extends Component {
     this._isMounted = true;
     this.fetchData(this.props.match.params.category);
     this.fetchCartData();
+
+    if (sessionStorage.collection) {
+      setTimeout(() => {
+        $('input[value="Barcelona"]')[0].click((event) =>
+          $('input[value="Barcelona"]')[0].trigger("click")
+        );
+        sessionStorage.removeItem("collection");
+      }, 500);
+    }
   };
 
   componentDidUpdate = (prevProps, prevState) => {
@@ -72,8 +82,7 @@ class ProductList extends Component {
   }
 
   sortArray = (method, order) => {
-
-
+    
     this.setState(
       {
         allProducts: _.orderBy(this.state.allProducts, [method], [order]),
@@ -91,8 +100,9 @@ class ProductList extends Component {
         this.setState({
           totalPages: Math.ceil(this.state.allProducts.length / 12),
         });
+        if (method == "price_new") {method = "price"}
 
-        $(".products-container__tooltip__sort-container__top__default").text(
+        $(".products-container__tooltip__sort-container__top__default").text(          
           method.split("_").join(" ") + " " + order + "ending"
         );
 
@@ -105,24 +115,33 @@ class ProductList extends Component {
     );
   };
 
+  clearFilter = () => {
+    console.log("asdfsfd");
+    this.state.filters = [];
+    const filtersObject = this.state.filters;
+    console.log(filtersObject.length);
+    this.setState({ clearState: Math.random() });
+
+    this.setState({
+      allProducts: this.state.products,
+    });
+  };
+
   searchHandler = () => {
-
-
-
-    $(".products-container").css("display","none")
+    $(".products-container").css("display", "none");
     this.setState(
       {
-        searchQuery: document.querySelector(".search-container__input").value.split(" "),
-        
+        searchQuery: document
+          .querySelector(".search-container__input")
+          .value.split(" "),
       },
-      
 
-      this.searchEngine, 
-
+      this.searchEngine
     );
   };
 
   searchEngine = () => {
+    this.state.filters = [];
 
     function hammingDistance(str1, str2) {
       var dist = 0;
@@ -136,56 +155,43 @@ class ProductList extends Component {
       return dist;
     }
 
-    console.log(this.state.searchQuery);
     let query = this.state.searchQuery;
 
-    this.setState({
-      allProducts: this.state.products.filter(function (item) {
-        if (
-          query[0] != ""
-        ) {
-          let index = [];
+    this.setState(
+      {
+        allProducts: this.state.products.filter(function (item) {
+          if (query[0] != "") {
+            let index = [];
 
-          for (var i = 0; i < query.length; i++) {
-            if (
-              item.tags.findIndex((x) =>
-                hammingDistance(x, query[i]) <= 1
-                  ? true
-                  : false
-              ) > -1
-            ) {
-              index.push(1);
+            for (var i = 0; i < query.length; i++) {
+              if (
+                item.tags.findIndex((x) =>
+                  hammingDistance(x, query[i]) <= 1 ? true : false
+                ) > -1
+              ) {
+                index.push(1);
+              }
             }
 
-            console.log(query[i]);
-          }
-          console.log(index);
-
-          console.log(index.length);
-          console.log(query.length);
-
-          
-          if (index.length <  query.length) {
-            return false;
+            if (index.length < query.length) {
+              return false;
+            } else {
+              return true;
+            }
           } else {
             return true;
           }
-        } else {
-          return true;
+        }),
+      },
+      () => {
+        if (this.state.allProducts.length == 0) {
+          $(".search-no-results").addClass("active");
         }
-
-      }),
-    }, () => {
-      console.log(this.state.allProducts.length)
-      if (this.state.allProducts.length == 0) {
-        $(".search-no-results").addClass("active")
       }
-    });
-    
+    );
 
-
-    $(".products-container").css("display","grid")
-  }
+    $(".products-container").css("display", "grid");
+  };
 
   SortPickerHandler = () => {
     $(".products-container__tooltip__sort-container .arrow").toggleClass(
@@ -196,29 +202,28 @@ class ProductList extends Component {
     );
   };
 
-
-
   fetchData = (category) => {
     axios
       .get("/api/products")
       .then((response) => {
         if (this._isMounted) {
-          this.setState({
-            products: response.data.filter((filteredProduct) => {
-              return (
-                filteredProduct.category ===
-                (category === "all" || category.startsWith("search")
-                  ? filteredProduct.category
-                  : category)
-              );
-            }),
-          });
+          this.setState(
+            {
+              products: response.data.filter((filteredProduct) => {
+                return (
+                  filteredProduct.category ===
+                  (category === "all" || category.startsWith("search")
+                    ? filteredProduct.category
+                    : category)
+                );
+              }),
+            },
+          
+          );
 
           this.setState({ allProducts: this.state.products });
 
           this.searchHandler();
-
-
 
           this.sortArray("product_name", "asc");
           console.log("line");
@@ -256,9 +261,13 @@ class ProductList extends Component {
   selectFilterHandler = (event) => {
     if (!event.classList) {
       if (!event.target.checked) {
+        console.log("pushed");
+        console.log([event.target.name, event.target.value]);
+
         this.state.filters.push({
           filters: [event.target.name, event.target.value],
         });
+        console.log(this.state.filters);
       } else {
         const index = this.state.filters.findIndex(
           (x) => x.filters[1] === event.target.value
@@ -296,23 +305,14 @@ class ProductList extends Component {
         if (filtersObject.length > 0) {
           for (var i = 0; i < filtersObject.length; i++) {
             if (filtersObject[i].filters[0] === "price") {
-              console.log(filtersObject[i].filters[1].split(",")[0]);
-              console.log(filtersObject[i].filters[1].split(",")[1]);
-              console.log(item.price);
-              console.log(
-                item.price !== undefined &&
-                  item.price >= filtersObject[i].filters[1].split(",")[0] &&
-                  item.price <= filtersObject[i].filters[1].split(",")[1]
-              );
+              console.log(filtersObject[i].filters[0]);
+              console.log(filtersObject[i]);
+
               if (
-                item.price === undefined ||
-                (item.price >= filtersObject[i].filters[1].split(",")[0] &&
-                  item.price <= filtersObject[i].filters[1].split(",")[1])
+                item.price !== undefined &&
+                item.price < filtersObject[i].filters[1].split(",")[0] &&
+                item.price > filtersObject[i].filters[1].split(",")[1]
               ) {
-                console.log("fffalse");
-                return true;
-              } else {
-                console.log("tttruee");
                 return false;
               }
             } else {
@@ -321,17 +321,16 @@ class ProductList extends Component {
                 item[filtersObject[i].filters[0]] == filtersObject[i].filters[1]
               ) {
                 return false;
-              } else {
-                return true;
               }
             }
           }
+
+          return true;
         } else {
           return true;
         }
       }),
     });
-
   };
 
   onPageChanged = (data) => {
@@ -347,12 +346,11 @@ class ProductList extends Component {
   };
 
   render() {
-
-    $(document).on('click', (event) => {
-
-      
-      if ($(event.target).closest('.products-container__tooltip__sort-container').length == 0) {
-
+    $(document).on("click", (event) => {
+      if (
+        $(event.target).closest(".products-container__tooltip__sort-container")
+          .length == 0
+      ) {
         $(".products-container__tooltip__sort-container .arrow").removeClass(
           "active"
         );
@@ -367,31 +365,46 @@ class ProductList extends Component {
           "active"
         );
       }
-      
 
-      if ($(event.target).closest('.products-container__tooltip__filter-container').length == 0) {
+      if (
+        $(event.target).closest(
+          ".products-container__tooltip__filter-container"
+        ).length == 0
+      ) {
+        $(
+          ".products-container__tooltip__filter-container__dashboard"
+        ).removeClass("active");
+        $(
+          ".products-container__tooltip__filter-container__top .arrow"
+        ).removeClass("active");
+      }
 
-        $(".products-container__tooltip__filter-container__dashboard").removeClass(
-          "active"
+      if ($(event.target).closest(".search-container").length == 0) {
+        console.log($(event.target).closest(".search-container").length);
+        $(".search-container__close, .search-container__arrow").removeClass(
+          "show"
         );
-        $(".products-container__tooltip__filter-container__top .arrow").removeClass(
-          "active"
+        $(".search-container").removeClass("active");
+      }
+    });
+
+    $(".search-container__arrow").on("click", () =>
+      this.props.history.push(
+        "/shop/search&" +
+          $(".search-container__input").val().split(" ").join("&")
+      )
+    );
+
+    console.log(this.props.match.params.category);
+    $(".search-container__input").keyup((event) => {
+      if (event.which === 13) {
+        this.props.history.push(
+          "/shop/search&" +
+            $(".search-container__input").val().split(" ").join("&")
         );
       }
-      
+    });
 
-      
-    })
-
-    $(".search-container__arrow").on("click", () => this.props.history.push('/shop/search&' + $('.search-container__input').val().split(" ").join("&")));
-    console.log(this.props.match.params.category)
-    $(".search-container__input").keyup((event) => {
-      if (event.which === 13)
-      {
-        this.props.history.push('/shop/search&' + $('.search-container__input').val().split(" ").join("&"));
-    }
-  })
-        
     const { allProducts, currentProducts, currentPage } = this.state;
 
     localStorage.setItem("currentPage", JSON.stringify(currentPage));
@@ -426,9 +439,7 @@ class ProductList extends Component {
               {product.price} PLN
             </h3>
             <h3 className="products-container__list__product__label__price-container__new-price">
-              {product.discount_val > 0
-                ? product.price - product.discount_val + " PLN"
-                : ""}
+              {product.discount_val > 0 ? product.price_new + " PLN" : ""}
             </h3>
           </div>
         </div>
@@ -437,15 +448,16 @@ class ProductList extends Component {
 
     const ProductsContainerTitle = () => {
       if (this.props.match.params.category.startsWith("search")) {
-        return <h4>Search results for: {$(".search-container__input").val()}</h4>
+        return (
+          <h4>Search results for: {$(".search-container__input").val()}</h4>
+        );
       } else {
-        return <h4>Collection</h4>
+        return <h4>Collection</h4>;
       }
-    }
+    };
 
     return (
       <Aux>
-
         <Pagination
           totalRecords={this.state.allProducts.length}
           pageLimit={12}
@@ -489,7 +501,7 @@ class ProductList extends Component {
                 </li>
                 <li
                   onClick={() => {
-                    this.sortArray("price", "asc");
+                    this.sortArray("price_new", "asc");
                     this.SortPickerHandler();
                   }}
                 >
@@ -497,7 +509,7 @@ class ProductList extends Component {
                 </li>
                 <li
                   onClick={() => {
-                    this.sortArray("price", "desc");
+                    this.sortArray("price_new", "desc");
                     this.SortPickerHandler();
                   }}
                 >
@@ -506,7 +518,10 @@ class ProductList extends Component {
               </ul>
             </div>
 
-            <div className="products-container__tooltip__filter-container">
+            <div
+              key={this.state.clearState}
+              className="products-container__tooltip__filter-container"
+            >
               <div
                 className="products-container__tooltip__filter-container__top"
                 onClick={this.filterHandler}
@@ -518,7 +533,13 @@ class ProductList extends Component {
                 <h2 className="products-container__tooltip__filter-container__top__value"></h2>
                 <div className="arrow"></div>
               </div>
-              <div className="products-container__tooltip__filter-container__dashboard">
+              <div
+                key={this.props.match.params.category}
+                className="products-container__tooltip__filter-container__dashboard"
+              >
+                <h3 className="link-2" onClick={this.clearFilter}>
+                  Clear
+                </h3>
                 <div className="products-container__tooltip__filter-container__dashboard__price-container">
                   <h2 className="products-container__tooltip__filter-container__dashboard__price-container__title">
                     Price range:
@@ -528,13 +549,13 @@ class ProductList extends Component {
                     minValue={Math.min.apply(
                       Math,
                       this.state.products.map(function (product) {
-                        return product.price;
+                        return product.price_new;
                       })
                     )}
                     maxValue={Math.max.apply(
                       Math,
                       this.state.products.map(function (product) {
-                        return product.price;
+                        return product.price_new;
                       })
                     )}
                     clickHandler={() =>
@@ -593,10 +614,10 @@ class ProductList extends Component {
                       onChange={this.selectFilterHandler}
                       type="checkbox"
                       name="collection_name"
-                      value="Marocco"
+                      value="Barcelona"
                       defaultChecked="true"
                     />
-                    <h2>Marocco</h2>
+                    <h2>Barcelona</h2>
                   </label>
                 </div>
               </div>

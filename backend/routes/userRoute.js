@@ -9,6 +9,8 @@ const router = express.Router()
 const localStrategy = local.Strategy
 
 
+passport.initialize()
+passport.session()
 
     passport.use(
         new localStrategy({usernameField: 'email'}, (username, password, done) => {
@@ -29,16 +31,25 @@ const localStrategy = local.Strategy
         })
     )
 
-    passport.serializeUser((user, cb) => {
-        cb(null, user.id);
+    passport.serializeUser((user, done) => {
+        console.log(user.email)
+        done(null, user.email);
     })
-    passport.deserializeUser((id, cb) => {
-        User.findOne({_id: id}, (err, user) => {
+
+
+    passport.deserializeUser((username, done) => {
+
+        User.findOne({email: username}, (err, user) => {
             const userInformation = {
               username: user.email,
+              fname: user.name,
+              lname: user.surname
             };
-            cb(err, userInformation);
+
+            done(err, userInformation)
           });
+
+         
     })
 
 
