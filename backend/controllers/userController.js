@@ -9,6 +9,11 @@ export const getUser = asyncHandler(async(req, res) => {
 })
 
 
+export const logout = asyncHandler(async(req,res) => {
+  req.session.destroy()
+  res.json("Done");
+})
+
 
 export const signUp = asyncHandler(async (req, res) => {
   const user = await User.find({ email: req.body.email })

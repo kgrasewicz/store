@@ -141,7 +141,30 @@ export const getCart = asyncHandler(async (req, res) => {
   res.json(cart);
 });
 
+
+export const getHistory = asyncHandler(async (req, res) => {
+
+
+  const carts = await Cart.find({})
+  let history = [];
+
+  for (var i = 0; i < carts.length; i++) {
+    if (carts[i].personalData[0].email == req.params.user) {
+      history.push(carts[i])
+    }
+  }
+  console.log(req.params)
+  res.json(history);
+});
+
+
+
+
 export const postCartDB =  asyncHandler(async (req, res) => {
+
+
+
+  req.session.cart.total = req.session.cart.subTotal + req.session.cart.discountTotal + Number(req.session.cart.shippingDetails.price)
   const newCart = new Cart(req.session.cart);
 
   let data = await newCart.save();

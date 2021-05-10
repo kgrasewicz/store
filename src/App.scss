@@ -877,6 +877,24 @@ div.Casablanca {
   border-bottom: 2px solid $color-secondary-black;
 }
 
+
+.about {
+  .top-menu {
+    display: grid;
+    grid-template: 4vh auto/1fr;
+    z-index: 5;
+    justify-self: end;
+    align-self: start;
+    right: 30px;
+    position: absolute;
+    top: 10px;
+      &__icon {
+        padding: 0;
+        height: 2vh;
+      }
+  }
+}
+
 .about-desc {
   display: grid;
   grid-template: repeat(3, auto) / 1fr;
@@ -931,6 +949,134 @@ div.Casablanca {
   }
 }
 
+.contact {
+  overflow-y: auto;
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  grid-template: 8vh repeat(2, auto) 7vh/ 5vw 1fr 1fr 5vw;
+  top: 0;
+  position: absolute;
+  row-gap: 20px;
+
+  .top-menu {
+    grid-area: 1/6/span 1/span 1;
+    display: grid;
+    grid-template: 4vh auto/1fr;
+    z-index: 5;
+    justify-self: end;
+    align-self: start;
+    right: 30px;
+    position: absolute;
+    top: 10px;
+      &__icon {
+        padding: 0;
+        height: 2vh;
+      }
+  }
+
+  .logo-container {
+    grid-area: 2/2/span 1/span 1;
+  }
+
+  &__general {
+    grid-area: 3 / 2 / span 1 / span 1;
+    padding-right: 50px;
+    display: grid;
+    height: auto;
+    row-gap: 15px;
+    align-items: end;
+    align-self: end;
+    padding-bottom: 50px;
+
+    &__img {
+      grid-area: 1 / 3 / span 4 / span 1;
+      width: 70%;
+      align-self: center;
+    }
+  }
+}
+
+.terms {
+
+  .top-menu {
+    grid-area: 1/6/span 1/span 1;
+    display: grid;
+    grid-template: 4vh auto/1fr;
+    z-index: 5;
+    justify-self: end;
+    align-self: start;
+    right: 30px;
+    position: absolute;
+    top: 10px;
+      &__icon {
+        padding: 0;
+        height: 2vh;
+      }
+  }
+
+  overflow-y: auto;
+  display: grid;
+  height: auto;
+  width: 100vw;
+  grid-template: 8vh repeat(2, auto) 7vh/ 5vw 1fr 1fr 5vw;
+  top: 0;
+  position: absolute;
+  row-gap: 20px;
+
+  .logo-container {
+    grid-area: 2/2/span 1/span 1;
+  }
+
+  &__general {
+    grid-area: 3 / 2 / span 1 / span 1;
+    padding-right: 50px;
+    display: grid;
+    height: 60%;
+    align-items: end;
+    align-self: end;
+  }
+
+  &__title {
+    grid-area: 2 / 2 / span 1 / span 1;
+  }
+
+  &__list {
+    display: grid;
+    row-gap: 20px;
+    grid-area: 2/3/span 2/span 1;
+    overflow-y: scroll;
+    height: 77vh;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+  
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: $color-primary-white;
+      width: 1px;
+      border: 1px solid $color-secondary-black;
+    }
+  
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: $color-secondary-black;
+    }
+  
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+    li {
+      display: grid;
+      row-gap: 10px;
+      padding-right: 10px;
+    }
+  }
+}
+
 .shop {
   overflow-y: auto;
   display: grid;
@@ -943,8 +1089,12 @@ div.Casablanca {
   row-gap: 20px;
 
   &__confirmation {
-    grid-area: 2 / 2 / span 1 / span 1;
-    height: 80vh;
+    height: 100vh;
+    width: 100vw;
+    left: 0;
+    top: 0;
+    position: fixed;
+    z-index: 10;
     background: $color-primary-white;
     display: grid;
     justify-items: center;
@@ -972,7 +1122,7 @@ div.Casablanca {
     width: 90vw;
     grid-auto-flow: column;
     grid-template:
-      6vh / calc(15rem + 0.5vw) auto calc(50rem + 0.5vw) calc(2rem + 0.5vw)
+      6vh / calc(15rem + 0.5vw) auto calc(50rem + 0.5vw) calc(2rem + 0.5vw) min(50px,100px)
       calc(2.3rem + 0.5vw);
     border-bottom: 1px solid $color-border-grey;
     position: fixed;
@@ -981,6 +1131,27 @@ div.Casablanca {
     align-items: center;
     column-gap: 15px;
     z-index: 3;
+
+
+    &__login {
+      text-decoration: underline;
+      grid-area: 1 / 5 / span 1 / span 1;
+
+
+      .profile-icon {
+        height: calc(2rem + .5vw);
+
+        svg path {
+          color: $color-secondary-black;
+          stroke: $color-secondary-black;
+          stroke-width: 5px;
+        }
+      }
+
+      h2 {
+        text-align: center;
+      }
+    }
 
     &__list {
       display: grid;
@@ -1114,43 +1285,14 @@ div.Casablanca {
     }
 
     .top-menu {
-      grid-area: 1 / 5 / span 1 / span 1;
+      grid-area: 1 / 6 / span 1 / span 1;
       display: grid;
       grid-template: 4vh auto / 1fr;
       z-index: 5;
       justify-self: end;
       align-self: start;
 
-      &__list {
-        padding: 20vh 30px;
-        display: grid;
-
-        li {
-          text-align: left;
-          line-height: 600%;
-        }
-      }
-      &__icon {
-        display: grid;
-        grid-template: 1fr 1fr / 1fr;
-        place-items: center;
-        width: 20px;
-        justify-self: end;
-        padding: 13px 0;
-        cursor: pointer;
-        height: 6vh;
-        box-sizing: border-box;
-      }
-
-      &__icon-1,
-      &__icon-2 {
-        width: 20px;
-        height: 1.6px;
-        background: $color-secondary-black;
-        z-index: 2;
-        cursor: pointer;
-        transition: 0.2s;
-      }
+      
     }
   }
 
@@ -1239,6 +1381,16 @@ div.Casablanca {
         grid-template: 1fr/1fr 1fr;
         height: calc(6rem + 0.5vw);
         column-gap: 10px;
+
+        &.login {
+          grid-template: 1fr / 1fr;
+          column-gap: 0px;
+
+          button {
+            background: $color-primary-white;
+            color: $color-secondary-black;
+          }
+        }
 
         &__guest {
           cursor: pointer;
@@ -1919,6 +2071,157 @@ svg {
   }
 }
 
+
+.top-menu {
+  &__list {
+    padding: 20vh 30px;
+    display: grid;
+
+    li {
+      text-align: left;
+      line-height: 600%;
+    }
+  }
+  &__icon {
+    display: grid;
+    grid-template: 1fr 1fr / 1fr;
+    place-items: center;
+    width: 20px;
+    justify-self: end;
+    padding: 13px 0;
+    cursor: pointer;
+    height: 6vh;
+    box-sizing: border-box;
+  }
+
+  &__icon-1,
+  &__icon-2 {
+    width: 20px;
+    height: 1.6px;
+    background: $color-secondary-black;
+    z-index: 2;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+}
+
+.profile-container {
+  display: grid;
+  grid-area: 2 / 2 / span 1 / span 1;
+  min-height: 80vh;
+  grid-template: auto auto 1fr / 1fr;
+  row-gap: 0px;
+  background: $color-primary-white;
+
+  &__title {
+    height: calc(10rem + .5vw);
+  }
+
+  .logout-button {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  &__legend {
+    display: grid;
+    grid-template: 1fr / 1fr 1.4fr 1fr 1fr .5fr;
+    grid-area: 2 / 1 / span 1 / span 3;
+    height: calc(4rem + .5vw);
+    border-bottom: 1px solid #f3f3f3;
+
+    &__date {
+      display: grid;
+      grid-template: 1fr / auto 1fr;
+      column-gap: 10px;
+
+      .arrow {
+        grid-area: 1/2/span 1/span 1;
+        height: calc(0.6rem + 0.5vw);
+        width: calc(0.6rem + 0.5vw);
+        cursor: pointer;
+
+        svg {
+          transform: translateY(20%) rotate(90deg);
+          path {
+          stroke-width: 10px;
+          stroke: $color-secondary-black;
+        }
+      }
+
+        svg.active {
+          
+          transform: translateY(20%) rotate(270deg);
+        }
+      }
+    }
+    
+  }
+
+  &__history {
+    height: auto;
+    grid-area: 3 / 1 / span 1 / span 4;
+
+    .no-history {
+      text-align: center;
+      top: 30vh;
+      position: relative;
+    }
+
+    &__item {
+      
+      display: grid;
+      grid-template: 1fr auto/ 1fr;
+      align-items: center;
+      border-bottom: 1px solid #f3f3f3;
+      height: auto;
+      
+
+      &__header {
+        width: 100%;
+        display: grid;
+        grid-template: 1fr / 1fr 1.4fr 1fr 1fr .5fr;
+        height: calc(20rem + 0.5vw);
+        align-items: center;
+
+        .arrow {
+          grid-area: 1 / 5 / span 1 / span 1;
+          height: calc(0.5rem + 0.5vw);
+          width: calc(0.5rem + 0.5vw);
+          border-bottom: 1px solid black;
+          border-left: 1px solid black;
+          transform: translateY(-15%) rotate(-45deg);
+          transition: 0.5s;
+          cursor: pointer;
+  
+          &.active {
+            transform: translateY(30%) rotate(135deg);
+          }
+        }
+
+        h2 {
+          font-weight: 600;
+        }
+        
+      }
+
+      &__list {
+        display: none;
+        
+        &.active {
+          display: grid;
+
+        }
+        li {
+          display: grid;
+          grid-template: 1fr / 2fr repeat(4,1fr);
+          height: calc(15rem + 0.5vw);
+          align-items: center;
+          background: #fafafa;
+        }
+      }
+}
+  }
+}
 .cart-container {
   display: grid;
   grid-area: 2 / 2 / span 1 / span 1;

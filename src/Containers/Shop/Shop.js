@@ -6,8 +6,12 @@ import ProductList from "../../Components/Shop/ProductList";
 import ProductItem from "../../Components/Shop/ProductItem";
 import Cart from "./Cart";
 import CartLogin from "../../Components/Shop/CartLogin";
+import Login from "../../Components/Shop/Login";
 import Checkout from "../../Components/Shop/Checkout";
-import Confirmation from "../../Components/Shop/Confirmation"
+import Confirmation from "../../Components/Shop/Confirmation";
+import Profile from "../../Components/Shop/Profile";
+import axios from "axios";
+import $ from "jquery";
 
 class Shop extends Component {
   constructor(props) {
@@ -17,13 +21,53 @@ class Shop extends Component {
 
     this.state = {
       id: null,
+      isSignedIn: false
     };
   }
+
+  componentDidMount = () => {
+    this.sendGetRequest()
+  }
+
+  sendGetRequest = () => {
+    
+    axios
+      .get("/api/users/getUser", { withCredentials: true })
+      .then((response) => {
+
+        console.log(response)
+        if (response.data == "") {
+          this.setState({isSignedIn: false})
+        } else {
+
+          this.setState({isSignedIn: true})
+          $('.checkout__form__name input[name="fname"]').val(
+            response.data.fname
+          );
+          $('.checkout__form__surname input[name="lname"]').val(
+            response.data.lname
+          );
+          $('.checkout__form__email input[name="email"]').val(
+            response.data.username
+          );
+  
+          $('.checkout__form__name input[name="fname"]').prop( "disabled", true )
+          $('.checkout__form__surname input[name="lname"]').prop( "disabled", true )
+          $('.checkout__form__email input[name="email"]').prop( "disabled", true )
+        }
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+  };
 
   render() {
     return (
       <div className="shop">
         <TopTooltip
+        isSignedIn={this.state.isSignedIn}
           clickHandler={() =>
             (document.querySelector(".search-container__input").value = "")
           }
@@ -42,6 +86,16 @@ class Shop extends Component {
         {this.props.children}
 
         <Switch>
+        <Route
+            path="/shop/profile"
+            render={(props) => <Profile {...props} />}
+          />
+
+        <Route
+            path="/shop/login"
+            render={(props) => <Login {...props} />}
+          />
+
           <Route
             path="/shop/cart/login"
             render={(props) => <CartLogin {...props} />}

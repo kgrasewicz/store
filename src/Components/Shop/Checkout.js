@@ -480,8 +480,8 @@ class Checkout extends Component {
             <h2 className="checkout__summary__shipping__title">{this.state.cart.shippingDetails ? "Shipping" : ""}</h2>
 
             <h2 className="checkout__summary__shipping__value">
-              {this.state.cart.shippingDetails ? this.state.cart.shippingDetails.price : ""}{" "}
-              PLN
+              {this.state.cart.shippingDetails ? (this.state.cart.shippingDetails.price + "PLN") : ""}{" "}
+              
             </h2>
           </div>
           <div className="checkout__summary__total">

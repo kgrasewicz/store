@@ -53,10 +53,7 @@ app.use(
 
 app.use(passport.initialize())
 app.use(passport.session())
-// app.post('/login', passport.authenticate('local', {
-//   successRedirect: "/",
-//   failureRedirect: '/shop/cart'
-// }))
+
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/coupons", couponsRoutes);
@@ -67,7 +64,6 @@ app.use(function (req, res, next){
 
 const PORT = process.env.PORT || 5002;
 
-//Express js listen method to run project on http://localhost:5000
 app.listen(
   PORT,
   console.log(`App is running in ${process.env.NODE_ENV} mode on port ${PORT}`)

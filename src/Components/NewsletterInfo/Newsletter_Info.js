@@ -23,7 +23,7 @@ const newsletterInfo = () => {
           </h2>
           <div className="newsletter__checkbox-container">
           <input type="checkbox" />
-          <h3>I understand and agree to <a className="link-2 link" href="#">terms and conditions</a> of subscription.</h3>
+          <h3>I understand and agree to <a className="link-2 link" href="/terms">terms and conditions</a> of subscription.</h3>
           </div>
           <InputForm
             handler={sendSubscription}

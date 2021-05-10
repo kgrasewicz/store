@@ -100,12 +100,12 @@ class ProductItem extends Component {
   handleCartClick = (event) => {
     if ($(event.target).is(".pop-cart-continue#pop__svg")) {
       $(".pop-cart-continue").toggleClass("active");
-      console.log("akdjfhsdk");
     }
   };
 
   addToCart = () => {
-    axios
+    
+      axios
       .post("/api/cart", {
         productId: this.state.product._id,
         productName: this.state.product.product_name,
@@ -137,26 +137,32 @@ class ProductItem extends Component {
           console.log(error);
         }
       );
+    
+    
   };
 
   cartHandler = (event) => {
-    console.log(!sessionStorage.getItem("chosenSize"))
-    let chosenSize = (sessionStorage.getItem("chosenSize") === "One Size" || !sessionStorage.getItem("chosenSize")) ? 1 : sessionStorage.getItem("chosenSize");
-    console.log(chosenSize)
-    console.log(this.state.product.stock.findIndex(
-      (x) => x.size == chosenSize))
-    let index = this.state.product.stock.findIndex(
-      (x) => x.size == chosenSize)
+
+    if ((this.state.stock.length !== 1 && $(".product-item-container__info__size-picker__default").text() != "Select") || this.state.stock.length === 1) {
+      console.log(!sessionStorage.getItem("chosenSize"))
+      let chosenSize = (sessionStorage.getItem("chosenSize") === "One Size" || !sessionStorage.getItem("chosenSize")) ? 1 : sessionStorage.getItem("chosenSize");
+      console.log(chosenSize)
+      console.log(this.state.product.stock.findIndex(
+        (x) => x.size == chosenSize))
+      let index = this.state.product.stock.findIndex(
+        (x) => x.size == chosenSize)
+        
+      if (this.state.product.stock[index].quantity > 0) {
+        this.addToCart();
+      }
       
-    if (this.state.product.stock[index].quantity > 0) {
-      this.addToCart();
+      sessionStorage.setItem(
+        "chosenSize",
+        "One Size"
+      );
+      $(".pop-cart-continue").toggleClass("active");
     }
     
-    sessionStorage.setItem(
-      "chosenSize",
-      "One Size"
-    );
-    $(".pop-cart-continue").toggleClass("active");
   };
 
   postNotify(event) {

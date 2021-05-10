@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import $ from "jquery";
 import InputForm from "./InputForm";
-import { useHistory } from "react-router-dom";
 
-class CartLogin extends Component {
+class Login extends Component {
   _isMounted = false;
 
   constructor(props) {
@@ -42,7 +41,7 @@ class CartLogin extends Component {
 
         if (response.data == "Valid") {
 
-          window.location.pathname = "/shop/cart/checkout/1";
+          window.location.pathname = "/shop/profile";
         }
       })
       .catch((error) => {
@@ -102,7 +101,7 @@ class CartLogin extends Component {
             Sign in
           </InputForm>
           
-          <div className="cart-login__form-container__buttons">
+          <div className="cart-login__form-container__buttons login">
             <button
               onClick={(e) => {
                 this.inputSectionHandler(
@@ -113,9 +112,6 @@ class CartLogin extends Component {
             >
               {this.state.inputSection == "login" ? "Sign up" : "Sign in"}
             </button>
-            <button className="cart-login__form-container__buttons__guest" onClick={() => window.location.pathname = "/shop/cart/checkout/1"}>
-              Continue as guest
-            </button>
           </div>
         </div>
       </div>
@@ -123,4 +119,4 @@ class CartLogin extends Component {
   }
 }
 
-export default CartLogin;
+export default Login;

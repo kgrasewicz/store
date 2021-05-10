@@ -15,6 +15,7 @@ class Cart extends Component {
     this.state = {
       cart: [],
       discount: null,
+      path: "/shop/cart/login"
     };
 
     this.props = props;
@@ -38,8 +39,26 @@ class Cart extends Component {
       console.log(this.state.cart);
       this._isMounted = true;
       this.fetchData();
+      this.sendGetRequest()
       this._isMounted = false;
     }
+  };
+
+  sendGetRequest = () => {
+    this._isMounted = true;
+    axios
+      .get("/api/users/getUser", {withCredentials: true})
+      .then((response) => {
+        if (response.data == "") {
+          this.setState({path: "/shop/cart/login"})
+        } else {
+          this.setState({path: "/shop/cart/checkout/1"})
+        }
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   fetchData = () => {
@@ -413,7 +432,7 @@ class Cart extends Component {
               <button className="cart-container__table__buttons__continue-shopping">
                 <NavLink to="/shop/all">Continue shopping</NavLink>
               </button>
-              <NavLink to ="/shop/cart/login">
+              <NavLink to={this.state.path}>
               <button className="cart-container__table__buttons__checkout">
                 Proceed to checkout 
               </button></NavLink>

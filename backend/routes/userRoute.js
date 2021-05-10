@@ -1,4 +1,4 @@
-import {signUp, getUser} from "../controllers/userController.js";
+import {signUp, getUser, logout} from "../controllers/userController.js";
 import express from 'express'
 import passport from "passport"
 import User from "../models/userModel.js";
@@ -76,6 +76,8 @@ router.post('/login', (req, res, next) => {
 
 
 router.route('/getUser').get(getUser)
+
+router.route('/logout').post(logout)
 
 router.route('/register').post(signUp)
 
