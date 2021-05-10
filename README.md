@@ -5,7 +5,7 @@
 * [Technologies](#technologies)
 
 ## General info
-This project is an online store with jewellery created with React.js.
+This project is an online jewellery store created with React.js.
 	
 ## Technologies
 Project is created with:
