@@ -16,3 +16,12 @@ Project is created with:
 * Node.js
 * MongoDB
 * Axios
+* Passport.js
+* Bcrypt
+
+## To do
+* email messages
+* private coupon codes for newsletter subscription
+* faq section
+* "favourites" section
+* changing user's password
