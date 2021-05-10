@@ -3,6 +3,7 @@
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
+* [To do](#to-do)
 
 ## General info
 This project is an online jewellery store created with React.js.
