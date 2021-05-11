@@ -3,6 +3,7 @@
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
+* [To do](#to-do)
 
 ## General info
 This project is an online jewellery store created with React.js.
@@ -16,3 +17,12 @@ Project is created with:
 * Node.js
 * MongoDB
 * Axios
+* Passport.js
+* Bcrypt
+
+## To do
+* email messages
+* private coupon codes for newsletter subscription
+* faq section
+* "favourites" section
+* changing user's password

@@ -1,7 +1,11 @@
 {
   "name": "store",
   "version": "0.1.0",
+<<<<<<< HEAD
   "private": false,
+=======
+  "private": true,
+>>>>>>> 54aa5574d1f79e09f56551d55177e1ff46ccaf78
   "homepage": "https://kgrasewicz.github.io/Jewellery-store",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
