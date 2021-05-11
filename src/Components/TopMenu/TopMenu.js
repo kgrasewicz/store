@@ -28,11 +28,11 @@ const topMenu = () => {
       </div>
       <div className="top-menu__bcg"></div>
       <ul className="top-menu__list">
-      <li><NavLink exact to="/" activeClassName='is-active'  className="menu-font link-2 link">home</NavLink></li>
-      <li><NavLink to="/shop/all" activeClassName='is-active' className="menu-font link-2 link">shop</NavLink></li>
-      <li><NavLink to="/about"activeClassName='is-active' className="menu-font link-2 link">about us</NavLink></li>
-      <li><NavLink to="/terms" activeClassName='is-active' className="menu-font link-2 link ">terms & shipment</NavLink></li>
-      <li><NavLink to="/contact" activeClassName='is-active'className="menu-font link-2 link">contact us</NavLink></li>
+      <li><NavLink exact to={process.env.PUBLIC_URL + "/"} activeClassName='is-active'  className="menu-font link-2 link">home</NavLink></li>
+      <li><NavLink to={process.env.PUBLIC_URL + "/shop/all"} activeClassName='is-active' className="menu-font link-2 link">shop</NavLink></li>
+      <li><NavLink to={process.env.PUBLIC_URL + "/about"} activeClassName='is-active' className="menu-font link-2 link">about us</NavLink></li>
+      <li><NavLink to={process.env.PUBLIC_URL + "/terms"} activeClassName='is-active' className="menu-font link-2 link ">terms & shipment</NavLink></li>
+      <li><NavLink to={process.env.PUBLIC_URL + "/contact"} activeClassName='is-active'className="menu-font link-2 link">contact us</NavLink></li>
       </ul>
 
     </div>

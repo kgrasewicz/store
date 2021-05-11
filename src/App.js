@@ -21,11 +21,11 @@ class App extends Component {
       <BrowserRouter basename={process.env.PUBLIC_URL}>
 
       <Route path="/" exact component={Home} />
-      <Route path="/jewellery-store/about" component={About} />
+      <Route path="/about" component={About} />
 
-      <Route path="/jewellery-store/shop" render={ (props) => <Shop></Shop>}/>
-      <Route path="/jewellery-store/terms" component={Terms} />
-      <Route path="/jewellery-store/contact" component={Contact} />
+      <Route path="/shop" render={ (props) => <Shop></Shop>}/>
+      <Route path="/terms" component={Terms} />
+      <Route path="/contact" component={Contact} />
 
       </BrowserRouter>
     </div>

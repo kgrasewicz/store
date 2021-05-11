@@ -18,7 +18,7 @@ const collectionDesc = (props) => {
     <Aux>
       <h2 className={collectionTitle[props.collection]}>{collectionContent[props.collection]}</h2>
       <div className={collectionTitle[props.collection]}><h1 className={collectionTitle[props.collection]}>{collectionTitle[props.collection]}</h1></div>
-      <NavLink to="/shop/all" onClick={goToCollection} className={"link link-1 " + collectionTitle[props.collection]}>Check collection &nbsp; 🡢</NavLink>
+      <NavLink to={process.env.PUBLIC_URL+ "/shop/all"} onClick={goToCollection} className={"link link-1 " + collectionTitle[props.collection]}>Check collection &nbsp; 🡢</NavLink>
       
     </Aux>
   );
