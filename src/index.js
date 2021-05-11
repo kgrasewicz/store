@@ -7,7 +7,7 @@ import BrowserRouter from 'react-router-dom/BrowserRouter'
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter basename="https://kgrasewicz.github.io/Jewellery-store">
+    <BrowserRouter basename="https://kgrasewicz.github.io/jewellery-store/">
     <App />
     </BrowserRouter>
   </React.StrictMode>,
