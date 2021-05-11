@@ -38,10 +38,11 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "start:lambda": "netlify-lambda serve src/lambda",
+    "build": "run-p build:**",
+    "build:app": "react-scripts build",
+    "build:lambda": "netlify-lambda build src/lambda",
     "start": "react-scripts start",
-    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
