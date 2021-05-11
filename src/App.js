@@ -18,7 +18,7 @@ class App extends Component {
   render() {
     return (
     <div className="App">
-      <BrowserRouter basename="https://kgrasewicz.github.io/jewellery-store/">
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
 
 
       <Route path="/" exact component={Home} />
