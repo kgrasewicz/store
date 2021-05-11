@@ -20,13 +20,12 @@ class App extends Component {
     <div className="App">
       <BrowserRouter basename={process.env.PUBLIC_URL}>
 
-
       <Route path="/" exact component={Home} />
-      <Route path="/about" component={About} />
+      <Route path="/jewellery-store/about" component={About} />
 
-      <Route path="/shop" render={ (props) => <Shop></Shop>}/>
-      <Route path="/terms" component={Terms} />
-      <Route path="/contact" component={Contact} />
+      <Route path="/jewellery-store/shop" render={ (props) => <Shop></Shop>}/>
+      <Route path="/jewellery-store/terms" component={Terms} />
+      <Route path="/jewellery-store/contact" component={Contact} />
 
       </BrowserRouter>
     </div>
