@@ -18,7 +18,7 @@ class App extends Component {
   render() {
     return (
     <div className="App">
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+
 
       <Route path="/" exact component={Home} />
       <Route path="/about" component={About} />
@@ -27,7 +27,7 @@ class App extends Component {
       <Route path="/terms" component={Terms} />
       <Route path="/contact" component={Contact} />
 
-      </BrowserRouter>
+
     </div>
 
   );

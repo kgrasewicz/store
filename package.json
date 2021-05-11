@@ -2,7 +2,7 @@
   "name": "store",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://kgrasewicz.github.io/jewellery-store/",
+  "homepage": ".",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
