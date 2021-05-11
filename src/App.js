@@ -19,14 +19,14 @@ class App extends Component {
     return (
     <div className="App">
 
-
+      <BrowserRouter>
       <Route path="/" exact component={Home} />
       <Route path="/about" component={About} />
 
       <Route path="/shop" render={ (props) => <Shop></Shop>}/>
       <Route path="/terms" component={Terms} />
       <Route path="/contact" component={Contact} />
-
+      </BrowserRouter>
 
     </div>
 
