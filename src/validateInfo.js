@@ -20,8 +20,16 @@ export default function validateInfo(values) {
         errors.password = "Password must be at minimum 8 characters long and contain at least one lowercase character, one uppercase character, one numeric character and one special character"
     }
 
+    if (!values.password1) {
+        errors.password1 = "Password required"
+
+
+    } else if  (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/.test(values.password1)){
+        errors.password1 = "Password must be at minimum 8 characters long and contain at least one lowercase character, one uppercase character, one numeric character and one special character"
+    }
+
     if (!values.password2) {
-        errors.password = "Password required"
+        errors.passwor2 = "Password required"
 
 
     } else if  (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/.test(values.password)){

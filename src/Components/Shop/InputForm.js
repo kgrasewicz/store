@@ -99,7 +99,7 @@ const InputForm = (props) => {
             <h3>Password:</h3>
             <input
               type="password"
-              name="password"
+              name="password1"
               placeholder="Enter password"
               value={values.name}
               onChange={handleChange}
