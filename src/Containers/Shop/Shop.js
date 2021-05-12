@@ -12,6 +12,8 @@ import Confirmation from "../../Components/Shop/Confirmation";
 import Profile from "../../Components/Shop/Profile";
 import axios from "axios";
 import $ from "jquery";
+import {BrowserRouter} from 'react-router-dom';
+
 
 class Shop extends Component {
   constructor(props) {
@@ -84,7 +86,7 @@ class Shop extends Component {
         </div>
 
         {this.props.children}
-
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
         <Route
             path="/shop/profile"
@@ -121,6 +123,7 @@ class Shop extends Component {
             render={(props) => <ProductList {...props} />}
           />
         </Switch>
+        </BrowserRouter>
       </div>
     );
   }

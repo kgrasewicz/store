@@ -15,7 +15,7 @@ import { createRequire } from 'module';
 import serverless from "serverless-http";
 
 
-
+const router = express.Router();
 const require = createRequire(import.meta.url);
 
 if (process.env.NODE_ENV !== 'production') {
@@ -63,7 +63,7 @@ app.use(function (req, res, next){
     res.locals.session = req.session
 });
 
-
+app.use('/.netlify/functions/server', router);
 const PORT = process.env.PORT || 5002;
 
 app.listen(
