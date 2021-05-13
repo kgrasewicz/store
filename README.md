@@ -18,7 +18,8 @@ Project is created with:
 * MongoDB
 * Axios
 * Passport.js
-* Bcrypt
+* Bcrypt.js
+* Lodash
 
 ## To do
 * email messages
