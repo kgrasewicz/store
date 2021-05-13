@@ -23,6 +23,8 @@ Project is created with:
 * Lodash
 
 ## To do
+* mobile layout
+* data validation
 * email messages
 * private coupon codes for newsletter subscription
 * faq section
