@@ -47,7 +47,7 @@ class Checkout extends Component {
   sendGetRequest = () => {
     this._isMounted = true;
     axios
-      .get("/api/users/getUser", {withCredentials: true})
+      .get("/.netlify/functions/server/users/getUser", {withCredentials: true})
       .then((response) => {
         console.log(response);
         $('.checkout__form__name input[name="fname"]').val(
@@ -73,7 +73,7 @@ class Checkout extends Component {
   fetchData = () => {
 
     axios
-      .get("/api/cart")
+      .get("/.netlify/functions/server/cart")
       .then((response) => {
         if (this._isMounted) {
           this.setState(
@@ -171,7 +171,7 @@ class Checkout extends Component {
 
   postPersonalData = () => {
     axios
-      .post("/api/cart/post-personal-data", {
+      .post("/.netlify/functions/server/cart/post-personal-data", {
         id: this.state.cart._id,
         firstName: $('input[name="fname"]').val(),
         lastName: $('input[name="lname"]').val(),
@@ -205,7 +205,7 @@ class Checkout extends Component {
       }
 
     axios
-      .post("/api/cart/post-shipping-data", {
+      .post("/.netlify/functions/server/cart/post-shipping-data", {
         id: this.state.cart._id,
         method: $("input[name='delivery']:checked").val(),
         address:
@@ -233,7 +233,7 @@ class Checkout extends Component {
     this._isMounted = true;
 
     axios
-      .delete("/api/cart/empty-cart")
+      .delete("/.netlify/functions/server/cart/empty-cart")
       .then((response) => {
         if (response.data != null && response.data < 1) {
           response.data = response.data;
@@ -257,7 +257,7 @@ class Checkout extends Component {
 
   postPaymentData = () => {
     axios
-      .post("/api/cart/post-payment-data", {
+      .post("/.netlify/functions/server/cart/post-payment-data", {
         id: this.state.cart._id,
         method: $("input[name='payment']:checked").val(),
       })
@@ -272,7 +272,7 @@ class Checkout extends Component {
 
   postCart = () => {
     axios
-      .post("/api/cart/post-cart-db")
+      .post("/.netlify/functions/server/cart/post-cart-db")
       .then((response) => {
         if (this._isMounted) {
           this.setState({

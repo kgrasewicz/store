@@ -106,7 +106,7 @@ class ProductList extends Component {
           method.split("_").join(" ") + " " + order + "ending"
         );
 
-        axios.get("/api/cart").then((response) => {
+        axios.get("/.netlify/functions/server/cart").then((response) => {
           $(".items-counter h5").text(response.data.itemsTotal);
 
           console.log(response);
@@ -204,7 +204,7 @@ class ProductList extends Component {
 
   fetchData = (category) => {
     axios
-      .get("/api/products")
+      .get("/.netlify/functions/server/products")
       .then((response) => {
         if (this._isMounted) {
           this.setState(
@@ -237,7 +237,7 @@ class ProductList extends Component {
   fetchCartData = () => {
     if (this._isMounted) {
       axios
-        .get("/api/cart")
+        .get("/.netlify/functions/server/cart")
         .then((response) => {
           $(".items-counter").text(response.data.itemsTotal);
 

@@ -63,7 +63,7 @@ class Cart extends Component {
 
   fetchData = () => {
     axios
-      .get("/api/cart")
+      .get("/.netlify/functions/server/cart")
       .then((response) => {
         if (this._isMounted) {
           this.setState({
@@ -84,7 +84,7 @@ class Cart extends Component {
     this._isMounted = true;
 
     axios
-      .delete("/api/cart/empty-cart")
+      .delete("/.netlify/functions/server/cart/empty-cart")
       .then((response) => {
         if (response.data != null && response.data < 1) {
           response.data = response.data;
@@ -109,7 +109,7 @@ class Cart extends Component {
     this._isMounted = true;
 
     axios
-      .post("/api/cart", {
+      .post("/.netlify/functions/server/cart", {
         productId: productId,
         size: size,
         quantity: quantity,
@@ -151,7 +151,7 @@ class Cart extends Component {
     
 
     axios
-      .get("/api/coupons/" + code)
+      .get("/.netlify/functions/server/coupons/" + code)
       .then((response) => {
         console.log(this.state.cart.items.length)
         for (var i = 0; i < this.state.cart.items.length; i++) {
@@ -164,7 +164,7 @@ class Cart extends Component {
 
             this._isMounted = true;
             axios
-              .post("/api/cart", {
+              .post("/.netlify/functions/server/cart", {
                 productId: this.state.cart.items[i].productId,
                 size: this.state.cart.items[i].size,
                 quantity: -2,

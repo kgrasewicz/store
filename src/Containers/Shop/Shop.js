@@ -34,7 +34,7 @@ class Shop extends Component {
   sendGetRequest = () => {
     
     axios
-      .get("/api/users/getUser", { withCredentials: true })
+      .get("/.netlify/functions/server/users/getUser", { withCredentials: true })
       .then((response) => {
 
         console.log(response)
@@ -86,7 +86,7 @@ class Shop extends Component {
         </div>
 
         {this.props.children}
-        <BrowserRouter basename={process.env.PUBLIC_URL}>
+
         <Switch>
         <Route
             path="/shop/profile"
@@ -123,7 +123,7 @@ class Shop extends Component {
             render={(props) => <ProductList {...props} />}
           />
         </Switch>
-        </BrowserRouter>
+
       </div>
     );
   }

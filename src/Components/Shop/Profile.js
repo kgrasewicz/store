@@ -71,7 +71,7 @@ class Profile extends Component {
 
   fetchData = () => {
     axios
-      .get("/api/cart/history/" + this.state.user)
+      .get("/.netlify/functions/server/cart/history/" + this.state.user)
       .then((response) => {
         console.log(response.data);
         if (this._isMounted) {
@@ -93,7 +93,7 @@ class Profile extends Component {
   sendGetRequest = () => {
     this._isMounted = true;
     axios
-      .get("/api/users/getUser", { withCredentials: true })
+      .get("/.netlify/functions/server/users/getUser", { withCredentials: true })
       .then((response) => {
         console.log(response.data);
         this.setState({ user: response.data.username }, this.fetchData);
@@ -106,7 +106,7 @@ class Profile extends Component {
   logout = () => {
     sessionStorage.clear();
     axios
-    .post("/api/users/logout")
+    .post("/.netlify/functions/server/users/logout")
     .then((response) => {
      window.location.pathname = "/shop/all"
     })

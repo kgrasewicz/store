@@ -36,7 +36,7 @@ class ProductItem extends Component {
 
   fetchItem = (id) => {
     axios
-      .get("/api/products/" + id)
+      .get("/.netlify/functions/server/products/" + id)
       .then((response) => {
         if (this._isMounted) {
           console.log(response);
@@ -106,7 +106,7 @@ class ProductItem extends Component {
   addToCart = () => {
     
       axios
-      .post("/api/cart", {
+      .post("/.netlify/functions/server/cart", {
         productId: this.state.product._id,
         productName: this.state.product.product_name,
         model: this.state.product.product_id,
@@ -123,7 +123,7 @@ class ProductItem extends Component {
           console.log(response);
 
           axios
-            .get("/api/cart")
+            .get("/.netlify/functions/server/cart")
             .then((response) => {
               $(".items-counter").text(response.data.itemsTotal);
 

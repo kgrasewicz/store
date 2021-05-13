@@ -32,7 +32,7 @@ class CartLogin extends Component {
     this._isMounted = true;
 
     axios
-      .post("/api/users/login", {
+      .post("/.netlify/functions/server/users/login", {
         email: $(".cart-login__form-container__email input").val(),
         password: $(".cart-login__form-container__password input").val(),
         withCredentials: true,
@@ -55,7 +55,7 @@ class CartLogin extends Component {
     this._isMounted = true;
     console.log($(".cart-login__form-container__email input").val());
     axios
-      .post("/api/users/register", {
+      .post("/.netlify/functions/server/users/register", {
         email: $(".cart-login__form-container__email input").val(),
         password: $(".cart-login__form-container__password input").val(),
         name: $(".cart-login__form-container__name input").val(),
@@ -75,7 +75,7 @@ class CartLogin extends Component {
     this._isMounted = true;
     console.log($(".cart-login__form-container__email input").val());
     axios
-      .get("/api/users/getUser", { withCredentials: true })
+      .get("/.netlify/functions/server/getUser", { withCredentials: true })
       .then((response) => {
         console.log(response);
       })
