@@ -9,9 +9,9 @@
 ## General info
 This project is an online jewellery store created with React.js. Please use following mock-up credentials to test project's features:
 
-Email: admin@blau.pl
-Password: Admin123!
-Promocode: WIOSNA
+-> Email: admin@blau.pl
+-> Password: Admin123!
+-> Promocode: WIOSNA
 
 If you wish, you may test the page by creating new personal account as well.
 	
