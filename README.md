@@ -1,5 +1,5 @@
 # Jewellery store
-### --> https://blau.netlify.app/
+--> https://blau.netlify.app/
 
 ## Table of contents
 * [General info](#general-info)
@@ -7,7 +7,13 @@
 * [To do](#to-do)
 
 ## General info
-This project is an online jewellery store created with React.js.
+This project is an online jewellery store created with React.js. Please use following mock-up credentials to test project's features:
+
+Email: admin@blau.pl
+Password: Admin123!
+Promocode: WIOSNA
+
+If you wish, you may test the page by creating new personal account as well.
 	
 ## Technologies
 Project is created with:
@@ -24,7 +30,6 @@ Project is created with:
 
 ## To do
 * mobile layout
-* data validation
 * email messages
 * private coupon codes for newsletter subscription
 * faq section
